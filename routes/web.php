@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProgramKegiatanController;
 use JetBrains\PhpStorm\Deprecated;
 
 /*
@@ -20,10 +21,22 @@ use JetBrains\PhpStorm\Deprecated;
 Route::get('/', function () {
     return redirect()->route('login');
 });
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/home', function () {
+    return redirect()->route('dashboard');
+})->middleware('auth');
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+
+Route::get('/prokeg', [ProgramKegiatanController::class, 'index'])->name('prokeg')->middleware('auth');
+Route::get('/prokeg/create', [ProgramKegiatanController::class, 'create'])->name('prokeg.create')->middleware('auth');
+Route::post('/prokeg/store', [ProgramKegiatanController::class, 'store'])->name('prokeg.store')->middleware('auth');
+Route::get('/prokeg/edit/{prokeg}', [ProgramKegiatanController::class, 'edit'])->name('prokeg.edit')->middleware('auth');
+Route::post('/prokeg/update', [ProgramKegiatanController::class, 'update'])->name('prokeg.update')->middleware('auth');
+Route::post('/prokeg/destroy', [ProgramKegiatanController::class, 'destroy'])->name('prokeg.destroy')->middleware('auth');
+
 
