@@ -13,31 +13,31 @@
                     class="img-fluid" alt="Phone image">
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                <form>
+                <form method="POST" action="/login">
+                    @csrf
                     <!-- Username input -->
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="Username">
-                        <label for="floatingInput">Username</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" autofocus required>
+                        <label for="username">Username</label>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-floating">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label for="floatingPassword">Password</label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                        <label for="password">Password</label>
                     </div>
 
-                    <div class="d-flex justify-content-around align-items-center mb-4">
+                    {{-- <div class="d-flex justify-content-around align-items-center mb-4">
                         <!-- Checkbox -->
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
                             <label class="form-check-label" for="form1Example3"> Remember me </label>
                         </div>
                         <a href="#!">Forgot password?</a>
-                    </div>
+                    </div> --}}
 
                     <!-- Submit button -->
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
-
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Log in</button>
                 </form>
             </div>
         </div>
