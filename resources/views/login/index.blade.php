@@ -6,6 +6,16 @@
     </script>
 </head>
 <section class="vh-100">
+    @if (session()->has('success'))
+        <div class="alert alert-success text-center" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if (session()->has('error'))
+        <div class="alert alert-danger text-center" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="container py-5 h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
             <div class="col-md-8 col-lg-7 col-xl-6">
@@ -13,17 +23,20 @@
                     class="img-fluid" alt="Phone image">
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+
                 <form method="POST" action="/login">
                     @csrf
                     <!-- Username input -->
                     <div class="form-floating">
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" autofocus required>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username"
+                            autofocus required>
                         <label for="username">Username</label>
                     </div>
 
                     <!-- Password input -->
                     <div class="form-floating">
-                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                        <input type="password" class="form-control" name="password" id="password"
+                            placeholder="Password" required>
                         <label for="password">Password</label>
                     </div>
 

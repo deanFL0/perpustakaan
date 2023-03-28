@@ -23,7 +23,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('/dashboard');
         }
-        return back()->withErrors('Username atau password salah');
+        return back()->with('error', 'Username atau password salah');
     }
 
     public function logout()

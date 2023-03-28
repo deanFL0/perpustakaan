@@ -16,6 +16,7 @@
                     alt="User Image">
             </div>
             <div class="info">
+                <a href="#" class="d-block">{{ Auth::user()->nama }}</a>
             </div>
         </div>
 
@@ -26,7 +27,29 @@
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
-
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fa-solid fa-layer-group"></i>
+                      <p>
+                        Program Kegiatan
+                        <i class="right fas fa-angle-left"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                      <li class="nav-item">
+                        <a href="/prokeg" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>List Program Kegiatan</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="/prokeg/create" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Tambah Program Kegiatan</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
             </ul>
             <!-- /.sidebar-menu -->
     </div>
