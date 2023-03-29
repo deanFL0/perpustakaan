@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('program_kegiatan', function (Blueprint $table) {
             $table->id();
             $table->string('nama_program');
-            $table->boolean('status')->nullable();
+            $table->string('status');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
         });

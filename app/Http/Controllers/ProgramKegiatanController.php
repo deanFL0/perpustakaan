@@ -21,7 +21,7 @@ class ProgramKegiatanController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nama' => 'required',
+            'nama_program' => 'required',
             'status' => 'required',
             'tanggal_mulai' => 'required',
             'tanggal_selesai' => 'required',
@@ -29,33 +29,32 @@ class ProgramKegiatanController extends Controller
 
         ProgramKegiatan::create($data);
 
-        return redirect()->route('prokeg.index');
+        return redirect()->route('prokeg');
     }
 
-    public function edit(ProgramKegiatan $prokeg)
+    public function edit($id)
     {
+        $prokeg = ProgramKegiatan::find($id);
         return view('prokeg.edit', ['prokeg' => $prokeg]);
     }
 
-    public function update()
+    public function update(Request $request)
     {
-        $data = request()->validate([
-            'nama' => 'required',
-            'kode' => 'required',
-            'jenis' => 'required'
+        $data = $request->validate([
+            'nama_program' => 'required',
+            'status' => 'required',
+            'tanggal_mulai' => 'required',
+            'tanggal_selesai' => 'required',
         ]);
 
         $prokeg = ProgramKegiatan::find(request()->id);
         $prokeg->update($data);
 
-        return redirect()->route('prokeg.index');
+        return redirect()->route('prokeg');
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        $prokeg = ProgramKegiatan::find(request()->id);
-        $prokeg->delete();
-
-        return redirect()->route('prokeg.index');
+        ProgramKegiatan::destroy($id);
     }
 }

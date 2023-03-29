@@ -35,8 +35,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/prokeg', [ProgramKegiatanController::class, 'index'])->name('prokeg')->middleware('auth');
 Route::get('/prokeg/create', [ProgramKegiatanController::class, 'create'])->name('prokeg.create')->middleware('auth');
 Route::post('/prokeg/store', [ProgramKegiatanController::class, 'store'])->name('prokeg.store')->middleware('auth');
-Route::get('/prokeg/edit/{prokeg}', [ProgramKegiatanController::class, 'edit'])->name('prokeg.edit')->middleware('auth');
+Route::get('/prokeg/edit/{id}', [ProgramKegiatanController::class, 'edit'])->name('prokeg.edit')->middleware('auth');
 Route::post('/prokeg/update', [ProgramKegiatanController::class, 'update'])->name('prokeg.update')->middleware('auth');
-Route::post('/prokeg/destroy', [ProgramKegiatanController::class, 'destroy'])->name('prokeg.destroy')->middleware('auth');
+Route::delete('/prokeg/destroy/{id}', [ProgramKegiatanController::class, 'destroy'])->name('prokeg.destroy')->middleware('auth');
 
 
