@@ -30,26 +30,58 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link active">
                         <i class="fa-solid fa-layer-group"></i>
-                      <p>
-                        Program Kegiatan
-                        <i class="right fas fa-angle-left"></i>
-                      </p>
+                        <p>
+                            Program Kegiatan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
                     <ul class="nav nav-treeview" style="display: none;">
-                      <li class="nav-item">
-                        <a href="/prokeg" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>List Program Kegiatan</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="/prokeg/create" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Tambah Program Kegiatan</p>
-                        </a>
-                      </li>
+                        <li class="nav-item">
+                            <a href="/prokeg" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Program Kegiatan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/prokeg/create" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tambah Program Kegiatan</p>
+                            </a>
+                        </li>
                     </ul>
-                  </li>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <p>
+                            User Controll
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                            <a href="/user" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List User</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/user/create" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tambah User</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <form action="/logout" method="post" class="nav-link">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            Logout
+                        </button>
+                    </form>
+                </li>
             </ul>
             <!-- /.sidebar-menu -->
     </div>

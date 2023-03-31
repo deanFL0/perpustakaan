@@ -6,7 +6,7 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <h1>Input Program Kegiatan</h1>
+                    <h1>Input User</h1>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -17,7 +17,7 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Tambah Kegiatan</h3>
+                    <h3 class="card-title">Tambah User</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                             <i class="fas fa-minus"></i>
@@ -25,28 +25,27 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('prokeg') }}" class="btn btn-primary mb-4">Kembali</a>
-                    <form action="{{ route('prokeg.store') }}" method="POST">
+                    <a href="{{ route('user') }}" class="btn btn-primary mb-4">Kembali</a>
+                    <form action="{{ route('user.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="nama_program">Nama Program Kegiatan</label>
-                            <input type="text" name="nama_program" placeholder="Nama prokeg" class="form-control">
+                            <label for="nama">Nama</label>
+                            <input type="text" name="nama" placeholder="Nama" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label for="status">Status Program Kegiatan</label>
-                            <select name="status" class="form-control">
-                                <option value="Belum dimulai">Belum dimulai</option>
-                                <option value="Sedang berlangsung">Sedang berlangsung</option>
-                                <option value="Selesai">Selesai</option>
+                            <label for="role">User Role</label>
+                            <select name="role" class="form-control">
+                                <option value="" hidden>Pilih Role</option>
+                                <option value="Petugas">Petugas</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="tanggal_mulai">Tanggal Mulai Program Kegiatan</label>
-                            <input type="date" name="tanggal_mulai" class="form-control">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" placeholder="Username" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label for="tanggal_selesai">Tanggal Selesai Program Kegiatan</label>
-                            <input type="date" name="tanggal_selesai" class="form-control">
+                            <label for="password">Password</label>
+                            <input type="text" name="password" placeholder="Password" class="form-control">
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">

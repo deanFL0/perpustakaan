@@ -17,7 +17,7 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Tambah Kegiatan</h3>
+                    <h3 class="card-title">Ubah Data Kegiatan</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                             <i class="fas fa-minus"></i>
@@ -43,11 +43,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="tanggal_mulai">Tanggal Mulai Program Kegiatan</label>
-                            <input type="date" name="tanggal_mulai" placeholder="Nama prokeg" class="form-control" value="{{ $prokeg->tanggal_mulai }}">
+                            <input type="date" name="tanggal_mulai" class="form-control" value="{{ $prokeg->tanggal_mulai }}">
                         </div>
                         <div class="mb-3">
                             <label for="tanggal_selesai">Tanggal Selesai Program Kegiatan</label>
-                            <input type="date" name="tanggal_selesai" placeholder="Nama prokeg" class="form-control" value="{{ $prokeg->tanggal_selesai }}">
+                            <input type="date" name="tanggal_selesai" class="form-control" value="{{ $prokeg->tanggal_selesai }}">
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">

@@ -9,7 +9,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('user.index');
+        $user = User::all();
+        return view('user.index', ['user' => $user]);
     }
 
     public function create()
@@ -21,13 +22,16 @@ class UserController extends Controller
     {
         $data = request()->validate([
             'nama' => 'required',
+            'role' => 'required',
             'username' => 'required',
             'password' => 'required'
         ]);
 
+        $data['password'] = bcrypt($data['password']);
+
         User::create($data);
 
-        return redirect()->route('user.index');
+        return redirect()->route('user');
     }
 
     public function edit(User $user)
@@ -35,25 +39,27 @@ class UserController extends Controller
         return view('user.edit', ['user' => $user]);
     }
 
-    public function update()
+    public function update($id)
     {
         $data = request()->validate([
             'nama' => 'required',
+            'role' => 'required',
             'username' => 'required',
             'password' => 'required'
         ]);
+        $data['password'] = bcrypt($data['password']);
 
-        $user = User::find(request()->id);
+        $user = User::find($id);
         $user->update($data);
 
-        return redirect()->route('user.index');
+        return redirect()->route('user');
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        $user = User::find(request()->id);
+        $user = User::find($id);
         $user->delete();
 
-        return redirect()->route('user.index');
+        return redirect()->route('user');
     }
 }
