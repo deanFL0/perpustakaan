@@ -38,6 +38,7 @@ Route::post('/prokeg/store', [ProgramKegiatanController::class, 'store'])->name(
 Route::get('/prokeg/edit/{id}', [ProgramKegiatanController::class, 'edit'])->name('prokeg.edit')->middleware('auth');
 Route::post('/prokeg/update', [ProgramKegiatanController::class, 'update'])->name('prokeg.update')->middleware('auth');
 Route::delete('/prokeg/destroy/{id}', [ProgramKegiatanController::class, 'destroy'])->name('prokeg.destroy')->middleware('auth');
+Route::get('/prokeg/print', [ProgramKegiatanController::class, 'print'])->name('prokeg.print')->middleware('auth');
 
 Route::group(['middleware' => ['auth', 'checkrole:admin']], function (){
     Route::get('/user', [UserController::class, 'index'])->name('user');

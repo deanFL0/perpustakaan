@@ -29,6 +29,9 @@
                         <div class="col-6">
                             <a href="{{ route('prokeg.create') }}" class="btn btn-primary mb-4">Tambah</a>
                         </div>
+                        <div class="col-6 right">
+                            <a href="{{ route('prokeg.print') }}" class="btn btn-primary mb-4">Export to Word</a>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-stripped table-hover">
                                 <thead>

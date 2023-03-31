@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProgramKegiatan;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class ProgramKegiatanController extends Controller
 {
@@ -56,5 +57,25 @@ class ProgramKegiatanController extends Controller
     public function destroy($id)
     {
         ProgramKegiatan::destroy($id);
+    }
+
+    public function print()
+    {
+        $prokeg = ProgramKegiatan::all();
+
+        //export all data to word
+        $templateProcessor = new TemplateProcessor('word_template/template.docx');
+        $templateProcessor->cloneRow('nama_program', count($prokeg));
+        $i = 1;
+        foreach ($prokeg as $prokeg) {
+            $templateProcessor->setValue('nama_program#' . $i, $prokeg->nama_program);
+            $templateProcessor->setValue('status#' . $i, $prokeg->status);
+            $templateProcessor->setValue('tanggal_mulai#' . $i, $prokeg->tanggal_mulai);
+            $templateProcessor->setValue('tanggal_selesai#' . $i, $prokeg->tanggal_selesai);
+            $i++;
+        }
+        $filename = 'Program Kegiatan.docx';
+        $templateProcessor->saveAs($filename);
+        return response()->download($filename)->deleteFileAfterSend(true);
     }
 }
