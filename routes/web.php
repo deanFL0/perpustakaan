@@ -39,11 +39,12 @@ Route::get('/prokeg/edit/{id}', [ProgramKegiatanController::class, 'edit'])->nam
 Route::post('/prokeg/update', [ProgramKegiatanController::class, 'update'])->name('prokeg.update')->middleware('auth');
 Route::delete('/prokeg/destroy/{id}', [ProgramKegiatanController::class, 'destroy'])->name('prokeg.destroy')->middleware('auth');
 
+Route::group(['middleware' => ['auth', 'checkrole:admin']], function (){
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
     Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
     Route::delete('/user/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-
+});
 

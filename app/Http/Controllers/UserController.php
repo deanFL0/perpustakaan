@@ -34,22 +34,24 @@ class UserController extends Controller
         return redirect()->route('user');
     }
 
-    public function edit(User $user)
+    public function edit($id)
     {
+        $user = User::find($id);
         return view('user.edit', ['user' => $user]);
     }
 
-    public function update($id)
+    public function update(Request $request)
     {
-        $data = request()->validate([
+        $data = $request->validate([
             'nama' => 'required',
             'role' => 'required',
             'username' => 'required',
             'password' => 'required'
         ]);
+
         $data['password'] = bcrypt($data['password']);
 
-        $user = User::find($id);
+        $user = User::find(request()->id);
         $user->update($data);
 
         return redirect()->route('user');

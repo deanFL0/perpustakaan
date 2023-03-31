@@ -50,6 +50,7 @@
                         </li>
                     </ul>
                 </li>
+                @if (Auth::user()->role == 'admin')
                 <li class="nav-item">
                     <a href="#" class="nav-link active">
                         <i class="fa-solid fa-layer-group"></i>
@@ -73,6 +74,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
                 <li class="nav-item">
                     <form action="/logout" method="post" class="nav-link">
                         @csrf

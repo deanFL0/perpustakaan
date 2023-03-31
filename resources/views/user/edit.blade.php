@@ -26,7 +26,7 @@
                 </div>
                 <div class="card-body">
                     <a href="{{ route('user') }}" class="btn btn-primary mb-4">Kembali</a>
-                    <form action="{{ route('user.store') }}" method="POST">
+                    <form action="{{ route('user.update') }}" method="POST">
                         @csrf
                         <input type="hidden" name="id" value="{{ $user->id }}">
                         <div class="mb-3">

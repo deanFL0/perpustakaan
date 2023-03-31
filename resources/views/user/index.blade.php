@@ -50,7 +50,7 @@
                                             <td>{{ $value->username }}</td>
                                             <td>{{ $value->password }}</td>
                                             <td>
-                                                <a href="{{ route('prokeg.edit', $value->id) }}"
+                                                <a href="{{ route('user.edit', $value->id) }}"
                                                     class="btn btn-warning">Edit</a> |
                                                 <a href="javascript:void(0)" data-id="{{ $value->id }}"
                                                     class="btn btn-danger btn-delete">Hapus</a>
@@ -106,7 +106,7 @@
                         ).then((result) => {
                             $.ajax({
                                 type: "delete",
-                                url: "{{ route('prokeg') }}/" + "destroy/" + id,
+                                url: "{{ route('user') }}/" + "destroy/" + id,
                                 data: {
                                     _token: "{{ csrf_token() }}"
                                 },
