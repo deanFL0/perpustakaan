@@ -37,10 +37,10 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Program</th>
-                                        <th>Status</th>
-                                        <th>Tanggal Mulai</th>
-                                        <th>Tanggal Selesai</th>
+                                        <th>@sortablelink('nama_program', 'Nama Program')</th>
+                                        <th>@sortablelink('status', 'Status')</th>
+                                        <th>@sortablelink('status', 'Tanggal Mulai')</th>
+                                        <th>@sortablelink('status', 'Tanggal Selesai')</th>
                                         <th style="width: 500px">Aksi</th>
                                     </tr>
                                 </thead>
@@ -67,6 +67,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
+                    {!! $prokeg->appends(Request::except('page'))->render() !!}
                 </div>
                 <!-- /.card-footer-->
             </div>

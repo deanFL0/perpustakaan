@@ -10,7 +10,7 @@ class ProgramKegiatanController extends Controller
 {
     public function index()
     {
-        $prokeg = ProgramKegiatan::all();
+        $prokeg = ProgramKegiatan::sortable()->paginate(10)->onEachSide(2)->fragment('prokeg');
         return view('prokeg.index', ['prokeg' => $prokeg]);
     }
 

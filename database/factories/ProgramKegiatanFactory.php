@@ -21,8 +21,8 @@ class ProgramKegiatanFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_program' => $this->faker->name,
-            'status' => $this->faker->name,
+            'nama_program' => $this->faker->text(15),
+            'status' => $this->faker->text(10),
             'tanggal_mulai' => $this->faker->date,
             'tanggal_selesai' => $this->faker->date,
         ];
