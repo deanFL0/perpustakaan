@@ -8,10 +8,20 @@ use PhpOffice\PhpWord\TemplateProcessor;
 
 class ProgramKegiatanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $prokeg = ProgramKegiatan::sortable()->paginate(10)->onEachSide(2)->fragment('prokeg');
-        return view('prokeg.index', ['prokeg' => $prokeg]);
+        $cari = $request->query('cari');
+        if(!empty($cari)){
+            $prokeg = ProgramKegiatan::sortable()
+            ->where('program_kegiatan.nama_program', 'like', '%' .$cari. '%')
+            ->orWhere('program_kegiatan.status', 'like',  '%' .$cari. '%')
+            ->orWhere('program_kegiatan.tanggal_mulai', 'like',  '%' .$cari. '%')
+            ->orWhere('program_kegiatan.tanggal_selesai', 'like',  '%' .$cari. '%')
+            ->paginate(10)->onEachSide(2)->fragment('prokeg');
+        } else {
+            $prokeg = ProgramKegiatan::sortable()->paginate(10)->onEachSide(2)->fragment('prokeg');
+        }
+        return view('prokeg.index', ['prokeg' => $prokeg, 'cari' => $cari]);
     }
 
     public function create()

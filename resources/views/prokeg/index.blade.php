@@ -32,6 +32,23 @@
                         <div class="col-6 right">
                             <a href="{{ route('prokeg.print') }}" class="btn btn-primary mb-4">Export to Word</a>
                         </div>
+                        <form method="GET">
+                            <div class="form-group row">
+                                <div class="col-sm">
+                                    <label for="cari" class="col-sm2 col-form-label">Cari Data</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input type="text" name="cari" class="form-control"
+                                        placeholder="Cari Program Kegiatan">
+                                </div>
+                                <div class="col-sm">
+                                    <button type="submit" class="btn btn-primary">Cari</button>
+                                </div>
+                                <div class="col-sm">
+                                    <a href="{{ route('prokeg') }}" class="btn btn-primary">Refresh</a>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table class="table table-stripped table-hover">
                                 <thead>
