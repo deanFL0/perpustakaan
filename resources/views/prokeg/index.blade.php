@@ -58,8 +58,8 @@
                                         <th>No</th>
                                         <th>@sortablelink('nama_program', 'Nama Program')</th>
                                         <th>@sortablelink('status', 'Status')</th>
-                                        <th>@sortablelink('status', 'Tanggal Mulai')</th>
-                                        <th>@sortablelink('status', 'Tanggal Selesai')</th>
+                                        <th>@sortablelink('tanggal_mulai', 'Tanggal Mulai')</th>
+                                        <th>@sortablelink('tanggal_selesai', 'Tanggal Selesai')</th>
                                         <th style="width: 500px">Aksi</th>
                                     </tr>
                                 </thead>
