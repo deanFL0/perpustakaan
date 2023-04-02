@@ -62,9 +62,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $no = 1 + ($prokeg->currentPage() - 1) * $prokeg->perPage();
+                                    @endphp
                                     @foreach ($prokeg as $item => $value)
                                         <tr>
-                                            <td>{{ $item + 1 }}</td>
+                                            <td>{{ $no++ }}</td>
                                             <td>{{ $value->nama_program }}</td>
                                             <td>{{ $value->status }}</td>
                                             <td>{{ $value->tanggal_mulai }}</td>
