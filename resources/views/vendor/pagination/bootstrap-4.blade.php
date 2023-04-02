@@ -4,12 +4,12 @@
             {{-- First Page --}}
             @if ($paginator->onFirstPage())
                 <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.first')">
-                    <span class="page-link" aria-hidden="true">&laquo;</span>
+                    <span class="page-link" aria-hidden="true">&laquo; First</span>
                 </li>
             @else
                 <li class="page-item">
                     <a class="page-link" href="{{ \Request::url() }}" rel="prev"
-                        aria-label="@lang('pagination.first')">&laquo;</a>
+                        aria-label="@lang('pagination.first')">&laquo; First</a>
                 </li>
             @endif
 
@@ -58,11 +58,11 @@
             @if ($paginator->hasMorePages())
                 <li class="page-item">
                     <a class="page-link" href="{{ \Request::url() . '?page=' . $paginator->lastPage() }}" rel="last"
-                        aria-label="@lang('pagination.last')">&raquo;</a>
+                        aria-label="@lang('pagination.last')">Last &raquo;</a>
                 </li>
             @else
                 <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.last')">
-                    <span class="page-link" aria-hidden="true">&raquo;</span>
+                    <span class="page-link" aria-hidden="true">Last &raquo;</span>
                 </li>
             @endif
         </ul>

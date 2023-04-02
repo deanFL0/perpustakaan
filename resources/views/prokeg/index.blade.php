@@ -26,10 +26,10 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-10">
                             <a href="{{ route('prokeg.create') }}" class="btn btn-primary mb-4">Tambah</a>
                         </div>
-                        <div class="col-6 right">
+                        <div class="col-2 right">
                             <a href="{{ route('prokeg.print') }}" class="btn btn-primary mb-4">Export to Word</a>
                         </div>
                         <form method="GET">
@@ -37,15 +37,17 @@
                                 <div class="col-sm">
                                     <label for="cari" class="col-sm2 col-form-label">Cari Data</label>
                                 </div>
-                                <div class="col-sm-8">
-                                    <input type="text" name="cari" class="form-control"
-                                        placeholder="Cari Program Kegiatan">
+                                <div class="col-sm-9">
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="cari" class="form-control"
+                                            placeholder="Cari Program Kegiatan">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-primary">Cari</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-sm">
-                                    <button type="submit" class="btn btn-primary">Cari</button>
-                                </div>
-                                <div class="col-sm">
-                                    <a href="{{ route('prokeg') }}" class="btn btn-primary">Refresh</a>
+                                    <a href="{{ route('prokeg') }}" class="btn btn-secondary">Refresh</a>
                                 </div>
                             </div>
                         </form>
