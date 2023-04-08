@@ -25,6 +25,19 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <form method="GET">
+
+                        <div class="row">
+                            @foreach ($years as $item => $value)
+                                <div class="col-1">
+                                    <input type="hidden">
+                                    <button type="submit" name="year" value="{{ $value->year }}"
+                                        class="btn btn-secondary mb-4">{{ $value->year }}</button>
+                                </div>
+                            @endforeach
+                        </div>
+                    </form>
+
                     <div class="row">
                         <div class="col-10">
                             <a href="{{ route('program.create') }}" class="btn btn-primary mb-4">Tambah</a>
@@ -74,8 +87,10 @@
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $value->jenis_program }}</td>
                                                 <td>{{ $value->jenis_kegiatan }}</td>
-                                                <td>{{ Carbon\Carbon::parse($value->waktu_pelaksanaan)->format('F-Y') }}</td>
-                                                <td>{{ Carbon\Carbon::parse($value->waktu_selesai)->format('F-Y') }}</td>
+                                                <td>{{ Carbon\Carbon::parse($value->waktu_pelaksanaan)->locale('id')->translatedFormat('F-Y') }}
+                                                </td>
+                                                <td>{{ Carbon\Carbon::parse($value->waktu_selesai)->locale('id')->translatedFormat('F-Y') }}
+                                                </td>
                                                 <td>{{ $value->keterangan }}</td>
                                                 <td>
                                                     <a href="{{ route('program.edit', $value->id) }}"

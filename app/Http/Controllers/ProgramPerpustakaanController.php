@@ -9,6 +9,14 @@ class ProgramPerpustakaanController extends Controller
 {
     public function index(Request $request)
     {
+        $years = ProgramPerpustakaan::selectRaw('YEAR(waktu_pelaksanaan) as year')->distinct()->orderBy('year', 'asc')->get();
+
+        $year = $request->query('year');
+        if(!empty($year)){
+            $program = ProgramPerpustakaan::sortable()->whereYear('waktu_pelaksanaan', $year)->paginate(10)->onEachSide(2)->fragment('program');
+            return view('program.index', ['program' => $program, 'years' => $years]);
+        }
+
         $cari = $request->query('cari');
         if (!empty($cari)) {
             $program = ProgramPerpustakaan::sortable()
@@ -20,7 +28,8 @@ class ProgramPerpustakaanController extends Controller
         } else {
             $program = ProgramPerpustakaan::sortable()->paginate(10)->onEachSide(2)->fragment('program');
         }
-        return view('program.index', ['program' => $program, 'cari' => $cari]);
+
+        return view('program.index', ['program' => $program, 'years' => $years]);
     }
 
     public function create()
@@ -53,6 +62,8 @@ class ProgramPerpustakaanController extends Controller
             $waktu_selesai = $request->waktu_selesai;
             $waktu_selesai = date('Y-m-d', strtotime($waktu_selesai));
             $request->merge(['waktu_selesai' => $waktu_selesai]);
+        } else {
+            $request->merge(['waktu_selesai' => null]);
         }
 
         $request->validate([
@@ -96,5 +107,9 @@ class ProgramPerpustakaanController extends Controller
     public function destroy($id)
     {
         ProgramPerpustakaan::destroy($id);
+    }
+
+    public function print(){
+
     }
 }

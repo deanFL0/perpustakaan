@@ -30,16 +30,16 @@
                         @csrf
                         <div class="mb-3">
                             <label for="jenis_program">Jenis Program</label>
-                            <input type="text" name="jenis_program" placeholder="Jenis Program" class="form-control">
+                            <input type="text" name="jenis_program" placeholder="Jenis Program" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="jenis_kegiatan">Jenis Kegiatan</label>
-                            <textarea name="jenis_kegiatan" class="form-control" cols="30" rows="10"></textarea>
+                            <textarea name="jenis_kegiatan" class="form-control" cols="30" rows="10" required></textarea>
                         </div>
                         <div class="row">
                             <div class="col-6">
                                 <label for="waktu_pelaksanaan">Waktu Pelaksanaan</label>
-                                <input type="month" name="waktu_pelaksanaan" class="form-control">
+                                <input type="month" name="waktu_pelaksanaan" class="form-control" required>
                             </div>
                             <div class="col-6">
                                 <label for="waktu_selesai">Waktu Selesai</label>
