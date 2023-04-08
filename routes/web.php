@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProgramKegiatanController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProgramPerpustakaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,14 @@ Route::get('/prokeg/edit/{id}', [ProgramKegiatanController::class, 'edit'])->nam
 Route::post('/prokeg/update', [ProgramKegiatanController::class, 'update'])->name('prokeg.update')->middleware('auth');
 Route::delete('/prokeg/destroy/{id}', [ProgramKegiatanController::class, 'destroy'])->name('prokeg.destroy')->middleware('auth');
 Route::get('/prokeg/print', [ProgramKegiatanController::class, 'print'])->name('prokeg.print')->middleware('auth');
+
+Route::get('/program', [ProgramPerpustakaanController::class, 'index'])->name('program')->middleware('auth');
+Route::get('/program/create', [ProgramPerpustakaanController::class, 'create'])->name('program.create')->middleware('auth');
+Route::post('/program/store', [ProgramPerpustakaanController::class, 'store'])->name('program.store')->middleware('auth');
+Route::get('/program/edit/{id}', [ProgramPerpustakaanController::class, 'edit'])->name('program.edit')->middleware('auth');
+Route::post('/program/update', [ProgramPerpustakaanController::class, 'update'])->name('program.update')->middleware('auth');
+Route::delete('/program/destroy/{id}', [ProgramPerpustakaanController::class, 'destroy'])->name('program.destroy')->middleware('auth');
+Route::get('/program/print', [ProgramPerpustakaanController::class, 'print'])->name('program.print')->middleware('auth');
 
 Route::group(['middleware' => ['auth', 'checkrole:admin']], function (){
     Route::get('/user', [UserController::class, 'index'])->name('user');

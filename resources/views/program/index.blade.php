@@ -27,10 +27,10 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-10">
-                            <a href="{{ route('prokeg.create') }}" class="btn btn-primary mb-4">Tambah</a>
+                            <a href="{{ route('program.create') }}" class="btn btn-primary mb-4">Tambah</a>
                         </div>
                         <div class="col-2 right">
-                            <a href="{{ route('prokeg.print') }}" class="btn btn-primary mb-4">Export to Word</a>
+                            <a href="{{ route('program.print') }}" class="btn btn-primary mb-4">Export to Word</a>
                         </div>
                         <form method="GET">
                             <div class="form-group row">
@@ -47,49 +47,54 @@
                                     </div>
                                 </div>
                                 <div class="col-sm">
-                                    <a href="{{ route('prokeg') }}" class="btn btn-secondary">Refresh</a>
+                                    <a href="{{ route('program') }}" class="btn btn-secondary">Refresh</a>
                                 </div>
                             </div>
                         </form>
-                        <div class="table-responsive">
-                            <table class="table table-stripped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>@sortablelink('nama_program', 'Nama Program')</th>
-                                        <th>@sortablelink('status', 'Status')</th>
-                                        <th>@sortablelink('tanggal_mulai', 'Tanggal Mulai')</th>
-                                        <th>@sortablelink('tanggal_selesai', 'Tanggal Selesai')</th>
-                                        <th style="width: 500px">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $no = 1 + ($prokeg->currentPage() - 1) * $prokeg->perPage();
-                                    @endphp
-                                    @foreach ($prokeg as $item => $value)
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table table-stripped table-hover w-auto">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $value->nama_program }}</td>
-                                            <td>{{ $value->status }}</td>
-                                            <td>{{ $value->tanggal_mulai }}</td>
-                                            <td>{{ $value->tanggal_selesai }}</td>
-                                            <td>
-                                                <a href="{{ route('prokeg.edit', $value->id) }}"
-                                                    class="btn btn-warning">Edit</a> |
-                                                <a href="javascript:void(0)" data-id="{{ $value->id }}"
-                                                    class="btn btn-danger btn-delete">Hapus</a>
-                                            </td>
+                                            <th>No</th>
+                                            <th>@sortablelink('jenis_program', 'Jenis Program')</th>
+                                            <th>@sortablelink('jenis_kegiatan', 'Jenis Kegiatan')</th>
+                                            <th>@sortablelink('waktu_pelaksanaan', 'Waktu Pelaksanaan')</th>
+                                            <th>@sortablelink('waktu_selesai', 'Waktu Selesai')</th>
+                                            <th>@sortablelink('keterangan', 'Keterangan')</th>
+                                            <th style="width: 500px">Aksi</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $no = 1 + ($program->currentPage() - 1) * $program->perPage();
+                                        @endphp
+                                        @foreach ($program as $item => $value)
+                                            <tr>
+                                                <td>{{ $no++ }}</td>
+                                                <td>{{ $value->jenis_program }}</td>
+                                                <td>{{ $value->jenis_kegiatan }}</td>
+                                                <td>{{ Carbon\Carbon::parse($value->waktu_pelaksanaan)->format('F-Y') }}</td>
+                                                <td>{{ Carbon\Carbon::parse($value->waktu_selesai)->format('F-Y') }}</td>
+                                                <td>{{ $value->keterangan }}</td>
+                                                <td>
+                                                    <a href="{{ route('program.edit', $value->id) }}"
+                                                        class="btn btn-warning">Edit</a> |
+                                                    <a href="javascript:void(0)" data-id="{{ $value->id }}"
+                                                        class="btn btn-danger btn-delete">Hapus</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+
                     </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    {!! $prokeg->appends(Request::except('page'))->render() !!}
+                    {!! $program->appends(Request::except('page'))->render() !!}
                 </div>
                 <!-- /.card-footer-->
             </div>
@@ -132,7 +137,7 @@
                         ).then((result) => {
                             $.ajax({
                                 type: "delete",
-                                url: "{{ route('prokeg') }}/" + "destroy/" + id,
+                                url: "{{ route('program') }}/" + "destroy/" + id,
                                 data: {
                                     _token: "{{ csrf_token() }}"
                                 },

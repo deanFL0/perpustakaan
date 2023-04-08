@@ -50,6 +50,29 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <p>
+                            Program Perpustakaan
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: none;">
+                        <li class="nav-item">
+                            <a href="/program" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Program Perpustakaan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/program/create" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tambah Program Perpustakaan</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 @if (Auth::user()->role == 'admin')
                 <li class="nav-item">
                     <a href="#" class="nav-link active">
