@@ -17,7 +17,7 @@ class ProgramPerpustakaan extends Model
     protected $fillable = [
         'jenis_program',
         'jenis_kegiatan',
-        'waktu_pelaksanaan',
+        'waktu_kegiatan',
         'waktu_selesai',
         'keterangan'
     ];
@@ -25,7 +25,7 @@ class ProgramPerpustakaan extends Model
     public $sortable = [
         'jenis_program',
         'jenis_kegiatan',
-        'waktu_pelaksanaan',
+        'waktu_kegiatan',
         'waktu_selesai',
         'keterangan'
     ];

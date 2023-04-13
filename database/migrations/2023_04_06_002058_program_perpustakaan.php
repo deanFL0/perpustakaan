@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('jenis_program');
             $table->string('jenis_kegiatan');
-            $table->date('waktu_pelaksanaan');
+            $table->date('waktu_kegiatan');
             $table->date('waktu_selesai')->nullable();
             $table->string('keterangan')->nullable();
         });

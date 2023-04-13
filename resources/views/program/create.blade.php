@@ -38,8 +38,8 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <label for="waktu_pelaksanaan">Waktu Pelaksanaan</label>
-                                <input type="month" name="waktu_pelaksanaan" class="form-control" required>
+                                <label for="waktu_kegiatan">Waktu kegiatan</label>
+                                <input type="month" name="waktu_kegiatan" class="form-control" required>
                             </div>
                             <div class="col-6">
                                 <label for="waktu_selesai">Waktu Selesai</label>

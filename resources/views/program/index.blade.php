@@ -89,15 +89,19 @@
                                                 <td>{{ $value->jenis_kegiatan }}</td>
                                                 <td>{{ Carbon\Carbon::parse($value->waktu_pelaksanaan)->locale('id')->translatedFormat('F-Y') }}
                                                 </td>
-                                                <td>{{ Carbon\Carbon::parse($value->waktu_selesai)->locale('id')->translatedFormat('F-Y') }}
-                                                </td>
-                                                <td>{{ $value->keterangan }}</td>
-                                                <td>
-                                                    <a href="{{ route('program.edit', $value->id) }}"
-                                                        class="btn btn-warning">Edit</a> |
-                                                    <a href="javascript:void(0)" data-id="{{ $value->id }}"
-                                                        class="btn btn-danger btn-delete">Hapus</a>
-                                                </td>
+                                                @if ($value->waktu_selesai == null)
+                                                    <td> - </td>
+                                                @else
+                                                    <td>{{ Carbon\Carbon::parse($value->waktu_selesai)->locale('id')->translatedFormat('F-Y') }}
+                                                    </td>
+                                                @endif
+                                                    <td>{{ $value->keterangan }}</td>
+                                                    <td>
+                                                        <a href="{{ route('program.edit', $value->id) }}"
+                                                            class="btn btn-warning">Edit</a> |
+                                                        <a href="javascript:void(0)" data-id="{{ $value->id }}"
+                                                            class="btn btn-danger btn-delete">Hapus</a>
+                                                    </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

@@ -31,16 +31,16 @@
                         <input type="hidden" name="id" value="{{ $program->id }}">
                         <div class="mb-3">
                             <label for="jenis_program">Jenis Program</label>
-                            <input type="text" name="jenis_program" placeholder="Nama program" class="form-control" value="{{ $program->jenis_program }}">
+                            <input type="text" name="jenis_program" placeholder="Nama program" class="form-control" value="{{ $program->jenis_program }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="jenis_kegiatan">Jenis Kegiatan</label>
-                            <textarea name="jenisKegiatan" class="form-control" cols="30" rows="10" >{{ $program->jenis_kegiatan }}</textarea>
+                            <textarea name="jenisKegiatan" class="form-control" cols="30" rows="10" required>{{ $program->jenis_kegiatan }}</textarea>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <label for="waktu_pelaksanaan">Waktu Pelaksanaan</label>
-                                <input type="month" name="waktu_pelaksanaan" class="form-control" value="{{ $program->waktu_pelaksanaan }}">
+                                <label for="waktu_kegiatan">Waktu kegiatan</label>
+                                <input type="month" name="waktu_kegiatan" class="form-control" value="{{ $program->waktu_kegiatan }}" required>
                             </div>
                             <div class="col-6">
                                 <label for="waktu_selesai">Waktu Selesai</label>
