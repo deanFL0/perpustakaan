@@ -87,12 +87,12 @@
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $value->jenis_program }}</td>
                                                 <td>{{ $value->jenis_kegiatan }}</td>
-                                                <td>{{ Carbon\Carbon::parse($value->waktu_pelaksanaan)->locale('id')->translatedFormat('F-Y') }}
+                                                <td>{{ $value->waktu_kegiatan }}
                                                 </td>
                                                 @if ($value->waktu_selesai == null)
-                                                    <td> - </td>
+                                                    <td> {{ $value->waktu_kegiatan }} </td>
                                                 @else
-                                                    <td>{{ Carbon\Carbon::parse($value->waktu_selesai)->locale('id')->translatedFormat('F-Y') }}
+                                                    <td>{{ $value->waktu_selesai }}
                                                     </td>
                                                 @endif
                                                     <td>{{ $value->keterangan }}</td>

@@ -30,7 +30,8 @@
                         @csrf
                         <div class="mb-3">
                             <label for="jenis_program">Jenis Program</label>
-                            <input type="text" name="jenis_program" placeholder="Jenis Program" class="form-control" required>
+                            <input type="text" name="jenis_program" placeholder="Jenis Program" class="form-control"
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="jenis_kegiatan">Jenis Kegiatan</label>

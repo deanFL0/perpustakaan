@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProgramPerpustakaan;
-use Termwind\Components\Dd;
+use Kyslik\ColumnSortable\Sortable;
+use PhpOffice\PhpWord\TemplateProcessor;
+use Carbon\Carbon;
 
 class ProgramPerpustakaanController extends Controller
 {
@@ -29,6 +31,14 @@ class ProgramPerpustakaanController extends Controller
         } else {
             $program = ProgramPerpustakaan::sortable()->paginate(10)->onEachSide(2)->fragment('program');
         }
+
+        foreach($program as $pro){
+            $pro->waktu_kegiatan = Carbon::parse($pro->waktu_kegiatan)->locale('id')->translatedFormat('F Y');
+            if($pro->waktu_selesai != null){
+                $pro->waktu_selesai = Carbon::parse($pro->waktu_selesai)->translatedFormat('F Y');
+            }
+        }
+
         return view('program.index', ['program' => $program, 'years' => $years]);
     }
 
@@ -73,7 +83,6 @@ class ProgramPerpustakaanController extends Controller
             'waktu_selesai' => 'nullable',
             'keterangan' => 'nullable'
         ]);
-        @dd($request->all());
         ProgramPerpustakaan::create($request->all());
         return redirect()->route('program');
     }
@@ -111,6 +120,28 @@ class ProgramPerpustakaanController extends Controller
     }
 
     public function print(){
+        $program = ProgramPerpustakaan::all();
+        $no = 1;
+        $year = date('2021');
+        //add 1 year to $year
+        $year2 = date('Y', strtotime('+1 year', strtotime($year)));
+        //export all data to word
+        $templateProcessor = new TemplateProcessor('word_template/template.docx');
+        $templateProcessor->cloneRow('jenis_program', count($program));
+        $i = 1;
 
+        foreach($program as $pro){
+            $templateProcessor->setValue('no#'.$i, $no++);
+            $templateProcessor->setValue('jenis_program#'.$i, $pro->jenis_program);
+            $templateProcessor->setValue('jenis_kegiatan#'.$i, $pro->jenis_kegiatan);
+            $templateProcessor->setValue('waktu_kegiatan#'.$i, $pro->waktu_kegiatan);
+            $templateProcessor->setValue('keterangan#'.$i, $pro->keterangan);
+            $i++;
+        }
+        $templateProcessor->setValue('year', $year);
+        $templateProcessor->setValue('year2', $year2);
+        $filename = 'PROGRAM PERPUSTAKAAN SEKOLAH TAHUN.docx';
+        $templateProcessor->saveAs($filename);
+        return response()->download($filename)->deleteFileAfterSend(true);
     }
 }
