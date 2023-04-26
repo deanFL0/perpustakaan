@@ -76,6 +76,11 @@ class ProgramPerpustakaanController extends Controller
             $request->merge(['waktu_selesai' => null]);
         }
 
+        //turn array into string from jenis_kegiatan
+        $jenis_kegiatan = $request->jenis_kegiatan;
+        $jenis_kegiatan = implode(", ", $jenis_kegiatan);
+        $request->merge(['jenis_kegiatan' => $jenis_kegiatan]);
+
         $request->validate([
             'jenis_program' => 'required',
             'jenis_kegiatan' => 'required',
