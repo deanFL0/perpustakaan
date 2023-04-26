@@ -86,7 +86,15 @@
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $value->jenis_program }}</td>
-                                                <td>{{ $value->jenis_kegiatan }}</td>
+                                                <td>
+                                                    @php
+                                                        $jenis_kegiatan = explode(',', $value->jenis_kegiatan);
+                                                        $no = 1;
+                                                    @endphp
+                                                    @foreach ($jenis_kegiatan as $item)
+                                                        {{ $no++ }}. {{ $item }} <br>
+                                                    @endforeach
+                                                </td>
                                                 <td>{{ $value->waktu_kegiatan }}
                                                 </td>
                                                 @if ($value->waktu_selesai == null)
