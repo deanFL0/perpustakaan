@@ -15,7 +15,7 @@ class ProgramPerpustakaanController extends Controller
         $years = ProgramPerpustakaan::selectRaw('YEAR(waktu_kegiatan) as year')->distinct()->orderBy('year', 'asc')->get();
 
         $year = $request->query('year');
-        if(!empty($year)){
+        if (!empty($year)) {
             $program = ProgramPerpustakaan::sortable()->whereYear('waktu_kegiatan', $year)->paginate(10)->onEachSide(2)->fragment('program');
             return view('program.index', ['program' => $program, 'years' => $years]);
         }
@@ -32,9 +32,9 @@ class ProgramPerpustakaanController extends Controller
             $program = ProgramPerpustakaan::sortable()->paginate(10)->onEachSide(2)->fragment('program');
         }
 
-        foreach($program as $pro){
+        foreach ($program as $pro) {
             $pro->waktu_kegiatan = Carbon::parse($pro->waktu_kegiatan)->locale('id')->translatedFormat('F Y');
-            if($pro->waktu_selesai != null){
+            if ($pro->waktu_selesai != null) {
                 $pro->waktu_selesai = Carbon::parse($pro->waktu_selesai)->translatedFormat('F Y');
             }
         }
@@ -68,7 +68,7 @@ class ProgramPerpustakaanController extends Controller
         $waktu_kegiatan = $request->waktu_kegiatan;
         $waktu_kegiatan = date('Y-m-d', strtotime($waktu_kegiatan));
         $request->merge(['waktu_kegiatan' => $waktu_kegiatan]);
-        if($request->waktu_selesai != null){
+        if ($request->waktu_selesai != null) {
             $waktu_selesai = $request->waktu_selesai;
             $waktu_selesai = date('Y-m-d', strtotime($waktu_selesai));
             $request->merge(['waktu_selesai' => $waktu_selesai]);
@@ -92,7 +92,7 @@ class ProgramPerpustakaanController extends Controller
         $program = ProgramPerpustakaan::find($id);
         //get only month and year from waktu_kegiatan and waktu_selesai
         $program->waktu_kegiatan = date('Y-m', strtotime($program->waktu_kegiatan));
-        if($program->waktu_selesai != null){
+        if ($program->waktu_selesai != null) {
             $program->waktu_selesai = date('Y-m', strtotime($program->waktu_selesai));
         }
 
@@ -119,29 +119,61 @@ class ProgramPerpustakaanController extends Controller
         ProgramPerpustakaan::destroy($id);
     }
 
-    public function print(){
-        $program = ProgramPerpustakaan::all();
-        $no = 1;
-        $year = date('2021');
-        //add 1 year to $year
-        $year2 = date('Y', strtotime('+1 year', strtotime($year)));
-        //export all data to word
-        $templateProcessor = new TemplateProcessor('word_template/template.docx');
-        $templateProcessor->cloneRow('jenis_program', count($program));
-        $i = 1;
+    public function print(Request $request)
+    {
+        //export data with selected year to word
+        $year = $request->query('year');
+        if (!empty($year)) {
+            $program = ProgramPerpustakaan::sortable()->whereYear('waktu_kegiatan', $year)->get();
+            $no = 1;
+            $year = date('Y');
+            //add 1 year to $year
+            $year2 = date('Y', strtotime('+1 year', strtotime($year)));
+            //export all data to word
+            $templateProcessor = new TemplateProcessor('word_template/template.docx');
+            $templateProcessor->cloneRow('jenis_program', count($program));
+            $i = 1;
 
-        foreach($program as $pro){
-            $templateProcessor->setValue('no#'.$i, $no++);
-            $templateProcessor->setValue('jenis_program#'.$i, $pro->jenis_program);
-            $templateProcessor->setValue('jenis_kegiatan#'.$i, $pro->jenis_kegiatan);
-            $templateProcessor->setValue('waktu_kegiatan#'.$i, $pro->waktu_kegiatan);
-            $templateProcessor->setValue('keterangan#'.$i, $pro->keterangan);
-            $i++;
+            foreach ($program as $pro) {
+                $templateProcessor->setValue('no#' . $i, $no++);
+                $templateProcessor->setValue('jenis_program#' . $i, $pro->jenis_program);
+                $templateProcessor->setValue('jenis_kegiatan#' . $i, $pro->jenis_kegiatan);
+                $templateProcessor->setValue('waktu_kegiatan#' . $i, $pro->waktu_kegiatan);
+                $templateProcessor->setValue('keterangan#' . $i, $pro->keterangan);
+                $i++;
+            }
+            $templateProcessor->setValue('tahun', $year);
+            $templateProcessor->setValue('tahun2', $year2);
+            $filename = 'PROGRAM PERPUSTAKAAN SEKOLAH TAHUN.docx';
+            $templateProcessor->saveAs($filename);
+            return response()->download($filename)->deleteFileAfterSend(true);
+        } else {
+            return redirect()->route('program');
         }
-        $templateProcessor->setValue('year', $year);
-        $templateProcessor->setValue('year2', $year2);
-        $filename = 'PROGRAM PERPUSTAKAAN SEKOLAH TAHUN.docx';
-        $templateProcessor->saveAs($filename);
-        return response()->download($filename)->deleteFileAfterSend(true);
+
+
+        // $program = ProgramPerpustakaan::all();
+        // $no = 1;
+        // $year = date('2021');
+        // //add 1 year to $year
+        // $year2 = date('Y', strtotime('+1 year', strtotime($year)));
+        // //export all data to word
+        // $templateProcessor = new TemplateProcessor('word_template/template.docx');
+        // $templateProcessor->cloneRow('jenis_program', count($program));
+        // $i = 1;
+
+        // foreach($program as $pro){
+        //     $templateProcessor->setValue('no#'.$i, $no++);
+        //     $templateProcessor->setValue('jenis_program#'.$i, $pro->jenis_program);
+        //     $templateProcessor->setValue('jenis_kegiatan#'.$i, $pro->jenis_kegiatan);
+        //     $templateProcessor->setValue('waktu_kegiatan#'.$i, $pro->waktu_kegiatan);
+        //     $templateProcessor->setValue('keterangan#'.$i, $pro->keterangan);
+        //     $i++;
+        // }
+        // $templateProcessor->setValue('year', $year);
+        // $templateProcessor->setValue('year2', $year2);
+        // $filename = 'PROGRAM PERPUSTAKAAN SEKOLAH TAHUN.docx';
+        // $templateProcessor->saveAs($filename);
+        // return response()->download($filename)->deleteFileAfterSend(true);
     }
 }
