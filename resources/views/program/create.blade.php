@@ -33,11 +33,16 @@
                             <input type="text" name="jenis_program" placeholder="Jenis Program" class="form-control"
                                 required>
                         </div>
-                        <div id="jenisKegiatan" class="mb-3">
+                        <div class="mb-3">
                             <label for="jenis_kegiatan">Jenis Kegiatan</label>
-                            {{-- <textarea name="jenis_kegiatan" class="form-control" cols="30" rows="10" required></textarea> --}}
-                            <input type="text" name="jenis_kegiatan" placeholder="Jenis Kegiatan" class="form-control"
-                                required>
+                            <ol>
+                                <div id="jenisKegiatan">
+                                    <li>
+                                        <input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan"
+                                            class="form-control" required>
+                                    </li>
+                                </div>
+                            </ol>
                         </div>
                         <div class="mb3">
                             <button type="button" class="btn btn-primary" onclick="addInput()">+ Jenis Kegiatan</button>
@@ -79,12 +84,9 @@
         // Call addInput() function on button click
         function addInput() {
             //add input text
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.name = 'jenis_kegiatan[]';
-            input.placeholder = 'Jenis Kegiatan';
-            input.className = 'form-control';
-            input.required = true;
+            const input = document.createElement("li");
+            input.innerHTML =
+                `<input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan" class="form-control" required>`;
             container.appendChild(input);
         }
     </script>
