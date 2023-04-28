@@ -31,20 +31,42 @@
                         <input type="hidden" name="id" value="{{ $program->id }}">
                         <div class="mb-3">
                             <label for="jenis_program">Jenis Program</label>
-                            <input type="text" name="jenis_program" placeholder="Nama program" class="form-control" value="{{ $program->jenis_program }}" required>
+                            <input type="text" name="jenis_program" placeholder="Nama program" class="form-control"
+                                value="{{ $program->jenis_program }}" required>
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="jenis_kegiatan">Jenis Kegiatan</label>
                             <textarea name="jenisKegiatan" class="form-control" cols="30" rows="10" required>{{ $program->jenis_kegiatan }}</textarea>
+                        </div> --}}
+                        <div class="mb-3">
+                            <label for="jenis_kegiatan">Jenis Kegiatan</label>
+                            <ol>
+                                <div id="jenisKegiatan">
+                                    @php
+                                        $jenisKegiatan = explode(',', $program->jenis_kegiatan);
+                                    @endphp
+                                    @foreach ($jenisKegiatan as $item)
+                                        <li>
+                                            <input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan"
+                                                class="form-control" value="{{ $item }}" required>
+                                        </li>
+                                    @endforeach
+                                </div>
+                            </ol>
+                        </div>
+                        <div class="mb3">
+                            <button type="button" class="btn btn-primary" onclick="addInput()">+ Jenis Kegiatan</button>
                         </div>
                         <div class="row">
                             <div class="col-6">
                                 <label for="waktu_kegiatan">Waktu kegiatan</label>
-                                <input type="month" name="waktu_kegiatan" class="form-control" value="{{ $program->waktu_kegiatan }}" required>
+                                <input type="month" name="waktu_kegiatan" class="form-control"
+                                    value="{{ $program->waktu_kegiatan }}" required>
                             </div>
                             <div class="col-6">
                                 <label for="waktu_selesai">Waktu Selesai</label>
-                                <input type="month" name="waktu_selesai" class="form-control" value="{{ $program->waktu_selesai }}">
+                                <input type="month" name="waktu_selesai" class="form-control"
+                                    value="{{ $program->waktu_selesai }}">
                             </div>
                         </div>
                         <div class="mb-3">
@@ -65,3 +87,18 @@
         </section>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        const container = document.getElementById("jenisKegiatan");
+
+        // Call addInput() function on button click
+        function addInput() {
+            //add input text
+            const input = document.createElement("li");
+            input.innerHTML =
+                `<input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan" class="form-control" required>`;
+            container.appendChild(input);
+        }
+    </script>
+@endpush
