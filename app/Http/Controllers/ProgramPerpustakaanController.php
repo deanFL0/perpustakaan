@@ -106,6 +106,20 @@ class ProgramPerpustakaanController extends Controller
 
     public function update(Request $request)
     {
+        $waktu_kegiatan = $request->waktu_kegiatan;
+        $waktu_kegiatan = date('Y-m-d', strtotime($waktu_kegiatan));
+        $request->merge(['waktu_kegiatan' => $waktu_kegiatan]);
+        if ($request->waktu_selesai != null) {
+            $waktu_selesai = $request->waktu_selesai;
+            $waktu_selesai = date('Y-m-d', strtotime($waktu_selesai));
+            $request->merge(['waktu_selesai' => $waktu_selesai]);
+        } else {
+            $request->merge(['waktu_selesai' => null]);
+        }
+
+        $jenis_kegiatan = $request->jenis_kegiatan;
+        $jenis_kegiatan = implode(", ", $jenis_kegiatan);
+        $request->merge(['jenis_kegiatan' => $jenis_kegiatan]);
 
         $data = $request->validate([
             'jenis_program' => 'required',
@@ -114,6 +128,7 @@ class ProgramPerpustakaanController extends Controller
             'waktu_selesai' => 'nullable',
             'keterangan' => 'nullable',
         ]);
+
         $program = ProgramPerpustakaan::find($request->id);
         $program->update($data);
         return redirect()->route('program');

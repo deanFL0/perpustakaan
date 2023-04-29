@@ -96,9 +96,22 @@
         function addInput() {
             //add input text
             const input = document.createElement("li");
-            input.innerHTML =
-                `<input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan" class="form-control" required>`;
+            const div = document.createElement("div");
+            div.className = "input-group mb-3";
+            div.innerHTML = `<input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan" class="form-control" required>`;
+
+            const divButton = document.createElement("div");
+            divButton.className = "input-group-append";
+            divButton.innerHTML = `<button type="button" class="btn btn-danger" onclick="removeInput(this)">-</button>`;
+            div.appendChild(divButton);
+
+            input.appendChild(div);
             container.appendChild(input);
+        }
+
+        function removeInput(div) {
+            //remove the li element
+            document.getElementById("jenisKegiatan").removeChild(div.parentNode.parentNode.parentNode);
         }
     </script>
 @endpush
