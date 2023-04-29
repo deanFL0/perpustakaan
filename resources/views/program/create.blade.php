@@ -35,7 +35,17 @@
                         </div>
                         <div class="mb-3">
                             <label for="jenis_kegiatan">Jenis Kegiatan</label>
-                            <textarea name="jenis_kegiatan" class="form-control" cols="30" rows="10" required></textarea>
+                            <ol>
+                                <div id="jenisKegiatan">
+                                    <li>
+                                        <input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan"
+                                            class="form-control" required>
+                                    </li>
+                                </div>
+                            </ol>
+                        </div>
+                        <div class="mb3">
+                            <button type="button" class="btn btn-primary" onclick="addInput()">+ Jenis Kegiatan</button>
                         </div>
                         <div class="row">
                             <div class="col-6">
@@ -66,3 +76,31 @@
         </section>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        const container = document.getElementById("jenisKegiatan");
+
+        // Call addInput() function on button click
+        function addInput() {
+            //add input text
+            const input = document.createElement("li");
+            const div = document.createElement("div");
+            div.className = "input-group mb-3";
+            div.innerHTML = `<input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan" class="form-control" required>`;
+
+            const divButton = document.createElement("div");
+            divButton.className = "input-group-append";
+            divButton.innerHTML = `<button type="button" class="btn btn-danger" onclick="removeInput(this)">-</button>`;
+            div.appendChild(divButton);
+
+            input.appendChild(div);
+            container.appendChild(input);
+        }
+
+        function removeInput(div) {
+            //remove the li element
+            document.getElementById("jenisKegiatan").removeChild(div.parentNode.parentNode.parentNode);
+        }
+    </script>
+@endpush
