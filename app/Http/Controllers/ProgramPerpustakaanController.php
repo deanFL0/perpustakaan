@@ -38,7 +38,6 @@ class ProgramPerpustakaanController extends Controller
                 $pro->waktu_selesai = Carbon::parse($pro->waktu_selesai)->translatedFormat('F Y');
             }
         }
-
         return view('program.index', ['program' => $program, 'years' => $years]);
     }
 
@@ -168,9 +167,8 @@ class ProgramPerpustakaanController extends Controller
             $templateProcessor->saveAs($filename);
             return response()->download($filename)->deleteFileAfterSend(true);
         } else {
-            return redirect()->route('program');
+            return redirect()->route('program')->with('error', 'Tahun tidak boleh kosong');
         }
-
 
         // $program = ProgramPerpustakaan::all();
         // $no = 1;

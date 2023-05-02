@@ -43,7 +43,10 @@
                             <a href="{{ route('program.create') }}" class="btn btn-primary mb-4">Tambah</a>
                         </div>
                         <div class="col-2 right">
-                            <a href="{{ route('program.print') }}" class="btn btn-primary mb-4">Export to Word</a>
+                            {{-- <a href="{{ route('program.print') }}" class="btn btn-success mb-4">Export</a> --}}
+                            <button type="button" class="btn btn-success mb-4" data-toggle="modal" data-target="#exportModal">
+                                Export
+                            </button>
                         </div>
                         <form method="GET">
                             <div class="form-group row">
@@ -66,7 +69,7 @@
                         </form>
                         <div class="row">
                             <div class="table-responsive">
-                                <table class="table table-stripped table-hover w-auto">
+                                <table class="table table-stripped table-hover">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -75,7 +78,7 @@
                                             <th>@sortablelink('waktu_pelaksanaan', 'Waktu Pelaksanaan')</th>
                                             <th>@sortablelink('waktu_selesai', 'Waktu Selesai')</th>
                                             <th>@sortablelink('keterangan', 'Keterangan')</th>
-                                            <th style="width: 500px">Aksi</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -103,13 +106,13 @@
                                                     <td>{{ $value->waktu_selesai }}
                                                     </td>
                                                 @endif
-                                                    <td>{{ $value->keterangan }}</td>
-                                                    <td>
-                                                        <a href="{{ route('program.edit', $value->id) }}"
-                                                            class="btn btn-warning">Edit</a> |
-                                                        <a href="javascript:void(0)" data-id="{{ $value->id }}"
-                                                            class="btn btn-danger btn-delete">Hapus</a>
-                                                    </td>
+                                                <td>{{ $value->keterangan }}</td>
+                                                <td>
+                                                    <a href="{{ route('program.edit', $value->id) }}"
+                                                        class="btn btn-warning">Edit</a> |
+                                                    <a href="javascript:void(0)" data-id="{{ $value->id }}"
+                                                        class="btn btn-danger btn-delete">Hapus</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -127,6 +130,7 @@
             </div>
         </section>
     </div>
+    @include('program.modal.index')
 @endsection
 
 @push('css')
