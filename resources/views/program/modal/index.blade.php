@@ -14,7 +14,10 @@
                         <option value="" hidden>Pilih Tahun</option>
                         <?php
                         foreach ($years as $year) {
-                            echo '<option value="' . $year->year . '">' . $year->year . '</option>';
+                            echo '<option value="' . $year->year . "S1" . '">' .$year->year . " Semester 1 " . '</option>';
+                            echo '<option value="' . $year->year . "S2" . '">' .$year->year . " Semester 2 " . '</option>';
+
+                            // echo '<option value="' . $year->year . '">' . $year->year . '</option>';
                         }
                         ?>
                     </select>

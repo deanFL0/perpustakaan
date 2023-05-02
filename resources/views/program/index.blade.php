@@ -32,7 +32,7 @@
                                 <div class="col-1">
                                     <input type="hidden">
                                     <button type="submit" name="year" value="{{ $value->year }}"
-                                        class="btn btn-secondary mb-4">{{ $value->year }}</button>
+                                        class="btn btn-primary mb-4">{{ $value->year }}</button>
                                 </div>
                             @endforeach
                         </div>

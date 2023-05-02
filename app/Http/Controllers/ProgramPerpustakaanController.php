@@ -143,7 +143,15 @@ class ProgramPerpustakaanController extends Controller
         //export data with selected year to word
         $year = $request->query('year');
         if (!empty($year)) {
-            $program = ProgramPerpustakaan::sortable()->whereYear('waktu_kegiatan', $year)->get();
+            $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->get();
+            //check if year contain S1 or S2
+            if (strpos($year, 'S1') !== false) {
+                //get all data with year=$year and month=January to June
+                $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->whereMonth('waktu_kegiatan', '<=', 6)->get();
+            } elseif (strpos($year, 'S2') !== false) {
+                //get all data with year=$year and month=July to December
+                $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->whereMonth('waktu_kegiatan', '>=', 7)->get();
+            }
             $no = 1;
             $year = date('Y');
             //add 1 year to $year
@@ -169,29 +177,5 @@ class ProgramPerpustakaanController extends Controller
         } else {
             return redirect()->route('program')->with('error', 'Tahun tidak boleh kosong');
         }
-
-        // $program = ProgramPerpustakaan::all();
-        // $no = 1;
-        // $year = date('2021');
-        // //add 1 year to $year
-        // $year2 = date('Y', strtotime('+1 year', strtotime($year)));
-        // //export all data to word
-        // $templateProcessor = new TemplateProcessor('word_template/template.docx');
-        // $templateProcessor->cloneRow('jenis_program', count($program));
-        // $i = 1;
-
-        // foreach($program as $pro){
-        //     $templateProcessor->setValue('no#'.$i, $no++);
-        //     $templateProcessor->setValue('jenis_program#'.$i, $pro->jenis_program);
-        //     $templateProcessor->setValue('jenis_kegiatan#'.$i, $pro->jenis_kegiatan);
-        //     $templateProcessor->setValue('waktu_kegiatan#'.$i, $pro->waktu_kegiatan);
-        //     $templateProcessor->setValue('keterangan#'.$i, $pro->keterangan);
-        //     $i++;
-        // }
-        // $templateProcessor->setValue('year', $year);
-        // $templateProcessor->setValue('year2', $year2);
-        // $filename = 'PROGRAM PERPUSTAKAAN SEKOLAH TAHUN.docx';
-        // $templateProcessor->saveAs($filename);
-        // return response()->download($filename)->deleteFileAfterSend(true);
     }
 }
