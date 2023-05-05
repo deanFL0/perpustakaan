@@ -145,16 +145,24 @@ class ProgramPerpustakaanController extends Controller
     {
         //export data with selected year to word
         $year = $request->query('year');
-        if (!empty($year)) {
+        $semester = $request->query('semester');
+        $month1 = '';
+        $month2 = '';
+        if (!empty($year) && !empty($semester)) {
             $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->get();
             //check if year contain S1 or S2
-            if (strpos($year, 'S1') !== false) {
+            if (strpos($semester, 'S1') !== false) {
                 //get all data with year=$year and month=January to June
                 $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->whereMonth('waktu_kegiatan', '<=', 6)->get();
-            } elseif (strpos($year, 'S2') !== false) {
+                $month1 = 'Januari';
+                $month2 = 'Juni';
+            } elseif (strpos($semester, 'S2') !== false) {
                 //get all data with year=$year and month=July to December
                 $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->whereMonth('waktu_kegiatan', '>=', 7)->get();
+                $month1 = 'Juli';
+                $month2 = 'Desember';
             }
+
             $no = 1;
             $year = date('Y');
             //add 1 year to $year
@@ -163,6 +171,13 @@ class ProgramPerpustakaanController extends Controller
             $templateProcessor = new TemplateProcessor('word_template/template.docx');
             $templateProcessor->cloneRow('jenis_program', count($program));
             $i = 1;
+            //transform waktu_kegiatan date to F - Y format
+            foreach ($program as $pro) {
+                $pro->waktu_kegiatan = Carbon::parse($pro->waktu_kegiatan)->locale('id')->translatedFormat('F Y');
+                if ($pro->waktu_selesai != null) {
+                    $pro->waktu_selesai = Carbon::parse($pro->waktu_selesai)->translatedFormat('F Y');
+                }
+            }
 
             foreach ($program as $pro) {
                 $templateProcessor->setValue('no#' . $i, $no++);
@@ -172,9 +187,12 @@ class ProgramPerpustakaanController extends Controller
                 $templateProcessor->setValue('keterangan#' . $i, $pro->keterangan);
                 $i++;
             }
-            $templateProcessor->setValue('tahun', $year);
-            $templateProcessor->setValue('tahun2', $year2);
-            $filename = 'PROGRAM PERPUSTAKAAN SEKOLAH TAHUN.docx';
+
+            $templateProcessor->setValue('year', $year);
+            $templateProcessor->setValue('year2', $year2);
+            $templateProcessor->setValue('month1', $month1);
+            $templateProcessor->setValue('month2', $month2);
+            $filename = 'PROGRAM PERPUSTAKAAN SEKOLAH TAHUN ' . $year . '.docx';
             $templateProcessor->saveAs($filename);
             return response()->download($filename)->deleteFileAfterSend(true);
         } else {
