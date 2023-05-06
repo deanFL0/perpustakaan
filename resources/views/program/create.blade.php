@@ -50,11 +50,12 @@
                         <div class="row">
                             <div class="col-6">
                                 <label for="waktu_kegiatan">Waktu kegiatan</label>
-                                <input type="month" name="waktu_kegiatan" class="form-control" required>
+                                <input type="month" id="waktu_kegiatan" name="waktu_kegiatan" class="form-control" required onchange="minDate()">
                             </div>
                             <div class="col-6">
                                 <label for="waktu_selesai">Waktu Selesai</label>
-                                <input type="month" name="waktu_selesai" class="form-control">
+                                <input type="month" id="waktu_selesai" name="waktu_selesai" class="form-control">
+
                             </div>
                         </div>
                         <div class="mb-3">
@@ -101,6 +102,13 @@
         function removeInput(div) {
             //remove the li element
             document.getElementById("jenisKegiatan").removeChild(div.parentNode.parentNode.parentNode);
+        }
+
+        function minDate() {
+            const waktuKegiatan = document.getElementsByName("waktu_kegiatan")[0].value;
+            document.getElementsByName("waktu_selesai")[0].min = waktuKegiatan;
+
+
         }
     </script>
 @endpush
