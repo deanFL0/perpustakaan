@@ -87,7 +87,7 @@
             //add input text
             const input = document.createElement("li");
             const div = document.createElement("div");
-            div.className = "input-group mb-3";
+            div.className = "input-group mt-3";
             div.innerHTML = `<input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan" class="form-control" required>`;
 
             const divButton = document.createElement("div");
@@ -107,8 +107,6 @@
         function minDate() {
             const waktuKegiatan = document.getElementsByName("waktu_kegiatan")[0].value;
             document.getElementsByName("waktu_selesai")[0].min = waktuKegiatan;
-
-
         }
     </script>
 @endpush
