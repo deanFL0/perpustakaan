@@ -113,12 +113,12 @@
                                                         {{ $num++ }}. {{ $item }} <br>
                                                     @endforeach
                                                 </td>
-                                                <td>{{ $value->waktu_kegiatan }}
+                                                <td>{{ Carbon\Carbon::parse($value->waktu_kegiatan)->locale('id')->translatedFormat('F Y') }}
                                                 </td>
                                                 @if ($value->waktu_selesai == null)
-                                                    <td> {{ $value->waktu_kegiatan }} </td>
+                                                    <td> {{ Carbon\Carbon::parse($value->waktu_kegiatan)->locale('id')->translatedFormat('F Y') }} </td>
                                                 @else
-                                                    <td>{{ $value->waktu_selesai }}
+                                                    <td>{{ Carbon\Carbon::parse($value->waktu_selesai)->locale('id')->translatedFormat('F Y') }}
                                                     </td>
                                                 @endif
                                                 <td>{{ $value->keterangan }}</td>
@@ -164,7 +164,7 @@
                                 <option value="{{ $value }}">{{ $value }}</option>
                             @endforeach
                         </select>
-                        <select name="semester" class="form-control">
+                        <select id="semester" name="semester" class="form-control">
                             <option value="" hidden>Pilih Semester</option>
                             <option id="semester1" value="S1" hidden>Semester 1</option>
                             <option id="semester2" value="S2" hidden>Semester 2</option>
@@ -231,6 +231,9 @@
     </script>
     <script>
         function pilihSemester() {
+            //set semester select option to default value
+            document.getElementById('semester').selectedIndex = 0;
+
             const semester1 = document.getElementById('semester1');
             const semester2 = document.getElementById('semester2');
 
