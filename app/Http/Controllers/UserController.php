@@ -7,9 +7,20 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = User::all();
+
+        $cari = $request->query('cari');
+        if (!empty($cari)) {
+            $user = User::where('nama', 'like', '%' . $cari . '%')
+                ->orWhere('role', 'like',  '%' . $cari . '%')
+                ->orWhere('username', 'like',  '%' . $cari . '%')
+                ->paginate(10)->onEachSide(2)->fragment('user');
+        } else {
+            $user = User::paginate(10)->onEachSide(2)->fragment('user');
+        }
+
         return view('user.index', ['user' => $user]);
     }
 

@@ -29,6 +29,27 @@
                         <div class="col-6">
                             <a href="{{ route('user.create') }}" class="btn btn-primary mb-4">Tambah</a>
                         </div>
+                        <form method="GET">
+                            <div class="form-group row">
+                                <div class="col-sm">
+                                    <label for="cari" class="col-sm2 col-form-label">Cari Data</label>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="input-group mb-3">
+                                        <input type="text" name="cari" class="form-control"
+                                            placeholder="Cari Program Kegiatan">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-primary">Cari</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <a href="{{ route('user') }}" class="btn btn-secondary">Refresh</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
                         <div class="table-responsive">
                             <table class="table table-stripped table-hover">
                                 <thead>
@@ -45,7 +66,7 @@
                                     @foreach ($user as $item => $value)
                                         <tr>
                                             <td>{{ $item + 1 }}</td>
-                                            <td>{{ $value->nama}}</td>
+                                            <td>{{ $value->nama }}</td>
                                             <td>{{ $value->role }}</td>
                                             <td>{{ $value->username }}</td>
                                             <td>{{ $value->password }}</td>
