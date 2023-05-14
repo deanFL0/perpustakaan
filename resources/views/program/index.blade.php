@@ -113,12 +113,12 @@
                                                         {{ $num++ }}. {{ $item }} <br>
                                                     @endforeach
                                                 </td>
-                                                <td>{{ Carbon\Carbon::parse($value->waktu_kegiatan)->locale('id')->translatedFormat('F Y') }}
+                                                <td>{{ $value->waktu_kegiatan }}
                                                 </td>
                                                 @if ($value->waktu_selesai == null)
-                                                    <td> {{ Carbon\Carbon::parse($value->waktu_kegiatan)->locale('id')->translatedFormat('F Y') }} </td>
+                                                    <td> {{ $value->waktu_kegiatan }} </td>
                                                 @else
-                                                    <td>{{ Carbon\Carbon::parse($value->waktu_selesai)->locale('id')->translatedFormat('F Y') }}
+                                                    <td>{{ $value->waktu_selesai }}
                                                     </td>
                                                 @endif
                                                 <td>{{ $value->keterangan }}</td>

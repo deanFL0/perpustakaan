@@ -35,12 +35,12 @@ class ProgramPerpustakaanController extends Controller
             $program = ProgramPerpustakaan::sortable()->paginate(10)->onEachSide(2)->fragment('program');
         }
 
-        // foreach ($program as $pro) {
-        //     $pro->waktu_kegiatan = Carbon::parse($pro->waktu_kegiatan)->locale('id')->translatedFormat('F Y');
-        //     if ($pro->waktu_selesai != null) {
-        //         $pro->waktu_selesai = Carbon::parse($pro->waktu_selesai)->translatedFormat('F Y');
-        //     }
-        // }
+        foreach ($program as $pro) {
+            $pro->waktu_kegiatan = Carbon::parse($pro->waktu_kegiatan)->locale('id')->translatedFormat('F Y');
+            if ($pro->waktu_selesai != null) {
+                $pro->waktu_selesai = Carbon::parse($pro->waktu_selesai)->translatedFormat('F Y');
+            }
+        }
         return view('program.index', ['program' => $program, 'waktu_kegiatan' => $waktu_kegiatan]);
     }
 
