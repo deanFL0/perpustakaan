@@ -89,9 +89,9 @@
                                         <tr>
                                             <th>No</th>
                                             <th>@sortablelink('jenis_program', 'Jenis Program')</th>
-                                            <th>@sortablelink('jenis_kegiatan', 'Jenis Kegiatan')</th>
-                                            <th>@sortablelink('waktu_pelaksanaan', 'Waktu Pelaksanaan')</th>
-                                            <th>@sortablelink('waktu_selesai', 'Waktu Selesai')</th>
+                                            <th>Jenis Kegiatan</th>
+                                            <th>@sortablelink('waktu_kegiatan', 'Waktu Kegiatan')</th>
+                                            <th>Waktu Selesai</th>
                                             <th>@sortablelink('keterangan', 'Keterangan')</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -107,10 +107,10 @@
                                                 <td>
                                                     @php
                                                         $jenis_kegiatan = explode(',', $value->jenis_kegiatan);
-                                                        $no = 1;
+                                                        $num = 1;
                                                     @endphp
                                                     @foreach ($jenis_kegiatan as $item)
-                                                        {{ $no++ }}. {{ $item }} <br>
+                                                        {{ $num++ }}. {{ $item }} <br>
                                                     @endforeach
                                                 </td>
                                                 <td>{{ $value->waktu_kegiatan }}
