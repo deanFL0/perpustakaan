@@ -49,6 +49,12 @@ Route::post('/program/update', [ProgramPerpustakaanController::class, 'update'])
 Route::delete('/program/destroy/{id}', [ProgramPerpustakaanController::class, 'destroy'])->name('program.destroy')->middleware('auth');
 Route::get('/program/print', [ProgramPerpustakaanController::class, 'print'])->name('program.print')->middleware('auth');
 
+Route::get('/buku', [App\Http\Controllers\BukuController::class, 'index'])->name('buku')->middleware('auth');
+Route::get('/buku/create', [App\Http\Controllers\BukuController::class, 'create'])->name('buku.create')->middleware('auth');
+Route::post('/buku/store', [App\Http\Controllers\BukuController::class, 'store'])->name('buku.store')->middleware('auth');
+Route::get('/buku/{id}/edit', [App\Http\Controllers\BukuController::class, 'edit'])->name('buku.edit')->middleware('auth');
+Route::delete('/buku/{id}/delete', [App\Http\Controllers\BukuController::class, 'destroy'])->name('buku.destroy')->middleware('auth');
+
 Route::group(['middleware' => ['auth', 'checkrole:admin']], function (){
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
