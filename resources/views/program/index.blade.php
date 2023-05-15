@@ -116,7 +116,8 @@
                                                 <td>{{ Carbon\Carbon::parse($value->waktu_kegiatan)->locale('id')->translatedFormat('F Y') }}
                                                 </td>
                                                 @if ($value->waktu_selesai == null)
-                                                    <td> {{ Carbon\Carbon::parse($value->waktu_kegiatan)->locale('id')->translatedFormat('F Y') }} </td>
+                                                    <td> {{ Carbon\Carbon::parse($value->waktu_kegiatan)->locale('id')->translatedFormat('F Y') }}
+                                                    </td>
                                                 @else
                                                     <td>{{ Carbon\Carbon::parse($value->waktu_selesai)->locale('id')->translatedFormat('F Y') }}
                                                     </td>
@@ -240,9 +241,11 @@
             //get year from select option
             const year = document.querySelector('select[name="year"]').value;
             //waktu_kegiatan from php controller
-            const waktu_kegiatan = @json($program->pluck('waktu_kegiatan'));
+            const waktu_kegiatan = @json($waktu_kegiatan);
             //check month of the selected year in waktu_kegiatan
-            const month = waktu_kegiatan.filter(item => item.includes(year));
+            const month = waktu_kegiatan.filter(item => item.year == year).map(item => item.month);
+            console.log(year);
+            console.log(month);
             hideUnhide(month);
         }
 
@@ -251,26 +254,19 @@
             const semester2 = document.getElementById('semester2');
 
             //if month is between 1 to 6 and 7 to 12 unhide all option, if only 1 to 6 unhide semester 1 option, if only 7 to 12 unhide semester 2 option
-            if ((month.some(item => item.includes('01')) || month.some(item => item.includes('02')) || month.some(
-                    item => item.includes('03')) || month.some(item => item.includes('04')) || month.some(item =>
-                    item.includes('05')) || month.some(item => item.includes('06'))) && (month.some(item =>
-                    item.includes('07')) || month.some(item => item.includes('08')) || month.some(item =>
-                    item.includes('09')) || month.some(item => item.includes('10')) || month.some(item =>
-                    item.includes('11')) || month.some(item => item.includes('12')))) {
+            if (month.some(item => item >= 1 && item <= 6) && month.some(item => item >= 7 && item <= 12)) {
                 semester1.hidden = false;
                 semester2.hidden = false;
-            } else if (month.some(item => item.includes('01')) || month.some(item => item.includes('02')) || month.some(
-                    item => item.includes('03')) || month.some(item => item.includes('04')) || month.some(item =>
-                    item.includes('05')) || month.some(item => item.includes('06'))) {
+            } else if (month.some(item => item >= 1 && item <= 6)) {
                 semester1.hidden = false;
                 semester2.hidden = true;
-            } else if (month.some(item => item.includes('07')) || month.some(item => item.includes('08')) || month.some(
-                    item => item.includes('09')) || month.some(item => item.includes('10')) || month.some(item =>
-                    item.includes('11')) || month.some(item => item.includes('12'))) {
+            } else if (month.some(item => item >= 7 && item <= 12)) {
                 semester1.hidden = true;
                 semester2.hidden = false;
+            } else {
+                semester1.hidden = true;
+                semester2.hidden = true;
             }
-
         }
     </script>
 @endpush
