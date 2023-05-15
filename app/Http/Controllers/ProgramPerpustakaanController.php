@@ -12,15 +12,16 @@ class ProgramPerpustakaanController extends Controller
 {
     public function index(Request $request)
     {
+        $program = ProgramPerpustakaan::sortable()->paginate(10)->onEachSide(2)->fragment('program');
         //get waktu kegiatan
-        $waktu_kegiatan = ProgramPerpustakaan::selectRaw('MONTH(waktu_kegiatan) as month, YEAR(waktu_kegiatan) as year')->distinct()->orderBy('year', 'asc')->orderBy('month', 'asc')->get();
+        $waktu_kegiatan2 = ProgramPerpustakaan::selectRaw('MONTH(waktu_kegiatan) as month, YEAR(waktu_kegiatan) as year')->distinct()->orderBy('year', 'asc')->orderBy('month', 'asc')->get();
 
         // $years = ProgramPerpustakaan::selectRaw('YEAR(waktu_kegiatan) as year')->distinct()->orderBy('year', 'asc')->get();
 
         $year = $request->query('year');
         if (!empty($year)) {
             $program = ProgramPerpustakaan::sortable()->whereYear('waktu_kegiatan', $year)->paginate(10)->onEachSide(2)->fragment('program');
-            return view('program.index', ['program' => $program, 'waktu_kegiatan' => $waktu_kegiatan, 'year' => $year]);
+            return view('program.index', ['program' => $program, 'waktu_kegiatan' => $waktu_kegiatan2, 'year' => $year]);
         }
 
         $cari = $request->query('cari');
@@ -31,17 +32,9 @@ class ProgramPerpustakaanController extends Controller
                 ->orWhere('program_perpustakaan.waktu_kegiatan', 'like',  '%' . $cari . '%')
                 ->orWhere('program_perpustakaan.keterangan', 'like',  '%' . $cari . '%')
                 ->paginate(10)->onEachSide(2)->fragment('program');
-        } else {
-            $program = ProgramPerpustakaan::sortable()->paginate(10)->onEachSide(2)->fragment('program');
         }
 
-        foreach ($program as $pro) {
-            $pro->waktu_kegiatan = Carbon::parse($pro->waktu_kegiatan)->locale('id')->translatedFormat('F Y');
-            if ($pro->waktu_selesai != null) {
-                $pro->waktu_selesai = Carbon::parse($pro->waktu_selesai)->translatedFormat('F Y');
-            }
-        }
-        return view('program.index', ['program' => $program, 'waktu_kegiatan' => $waktu_kegiatan]);
+        return view('program.index', ['program' => $program, 'waktu_kegiatan' => $waktu_kegiatan2]);
     }
 
     public function create()

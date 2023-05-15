@@ -249,26 +249,28 @@
         function hideUnhide(month) {
             const semester1 = document.getElementById('semester1');
             const semester2 = document.getElementById('semester2');
-            //if month is between january to june and july to december unhide all option, if only january to june unhide semester 1 option, if only july to december unhide semester 2 option
-            if ((month.some(item => item.includes('Januari')) || month.some(item => item.includes('Februari')) || month
-                    .some(item => item.includes('Maret')) || month.some(item => item.includes('April')) || month.some(
-                        item => item.includes('Mei')) || month.some(item => item.includes('Juni'))) && (month.some(item =>
-                    item.includes('Juli')) || month.some(item => item.includes('Agustus')) || month.some(item => item
-                    .includes('September')) || month.some(item => item.includes('Oktober')) || month.some(item => item
-                    .includes('November')) || month.some(item => item.includes('Desember')))) {
+
+            //if month is between 1 to 6 and 7 to 12 unhide all option, if only 1 to 6 unhide semester 1 option, if only 7 to 12 unhide semester 2 option
+            if ((month.some(item => item.includes('01')) || month.some(item => item.includes('02')) || month.some(
+                    item => item.includes('03')) || month.some(item => item.includes('04')) || month.some(item =>
+                    item.includes('05')) || month.some(item => item.includes('06'))) && (month.some(item =>
+                    item.includes('07')) || month.some(item => item.includes('08')) || month.some(item =>
+                    item.includes('09')) || month.some(item => item.includes('10')) || month.some(item =>
+                    item.includes('11')) || month.some(item => item.includes('12')))) {
                 semester1.hidden = false;
                 semester2.hidden = false;
-            } else if (month.some(item => item.includes('Januari')) || month.some(item => item.includes('Februari')) ||
-                month.some(item => item.includes('Maret')) || month.some(item => item.includes('April')) || month.some(
-                    item => item.includes('Mei')) || month.some(item => item.includes('Juni'))) {
+            } else if (month.some(item => item.includes('01')) || month.some(item => item.includes('02')) || month.some(
+                    item => item.includes('03')) || month.some(item => item.includes('04')) || month.some(item =>
+                    item.includes('05')) || month.some(item => item.includes('06'))) {
                 semester1.hidden = false;
                 semester2.hidden = true;
-            } else if (month.some(item => item.includes('Juli')) || month.some(item => item.includes('Agustus')) || month
-                .some(item => item.includes('September')) || month.some(item => item.includes('Oktober')) || month.some(
-                    item => item.includes('November')) || month.some(item => item.includes('Desember'))) {
+            } else if (month.some(item => item.includes('07')) || month.some(item => item.includes('08')) || month.some(
+                    item => item.includes('09')) || month.some(item => item.includes('10')) || month.some(item =>
+                    item.includes('11')) || month.some(item => item.includes('12'))) {
                 semester1.hidden = true;
                 semester2.hidden = false;
             }
+
         }
     </script>
 @endpush
