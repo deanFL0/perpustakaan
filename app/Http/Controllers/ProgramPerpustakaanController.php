@@ -145,21 +145,21 @@ class ProgramPerpustakaanController extends Controller
             $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->get();
             //check if year contain S1 or S2
             if (strpos($semester, 'S1') !== false) {
-                //get all data with year=$year and month=January to June
-                $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->whereMonth('waktu_kegiatan', '<=', 6)->get();
-                $month1 = 'Januari';
-                $month2 = 'Juni';
-            } elseif (strpos($semester, 'S2') !== false) {
                 //get all data with year=$year and month=July to December
                 $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->whereMonth('waktu_kegiatan', '>=', 7)->get();
                 $month1 = 'Juli';
                 $month2 = 'Desember';
+            } elseif (strpos($semester, 'S2') !== false) {
+                //get all data with year=$year and month=January to June
+                $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->whereMonth('waktu_kegiatan', '<=', 6)->get();
+                $month1 = 'Januari';
+                $month2 = 'Juni';
             }
 
             $no = 1;
-            $year = date('Y');
-            //add 1 year to $year
-            $year2 = date('Y', strtotime('+1 year', strtotime($year)));
+            $years = $year;
+            $years2 = $years;
+            $years3 = $years;
             //export all data to word
             $templateProcessor = new TemplateProcessor('word_template/template.docx');
             $templateProcessor->cloneRow('jenis_program', count($program));
@@ -181,11 +181,22 @@ class ProgramPerpustakaanController extends Controller
                 $i++;
             }
 
-            $templateProcessor->setValue('year', $year);
-            $templateProcessor->setValue('year2', $year2);
+            if ($semester == 'S1') {
+                $semester = 'semester 1';
+                $years3 = $years + 1;
+            } elseif ($semester == 'S2') {
+                $semester = 'semester 2';
+                $years2 = $years - 1;
+            }
+
+            $templateProcessor->setValue('semester', $semester);
+            $templateProcessor->setValue('year', $years);
             $templateProcessor->setValue('month1', $month1);
             $templateProcessor->setValue('month2', $month2);
-            $filename = 'PROGRAM PERPUSTAKAAN SEKOLAH TAHUN ' . $year . '.docx';
+            $templateProcessor->setValue('year2', $years2);
+            $templateProcessor->setValue('year3', $years3);
+
+            $filename = 'PROGRAM PERPUSTAKAAN SEKOLAH TAHUN ' . $years . '.docx';
             $templateProcessor->saveAs($filename);
             return response()->download($filename)->deleteFileAfterSend(true);
         } else {

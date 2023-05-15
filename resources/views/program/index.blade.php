@@ -253,16 +253,16 @@
             const semester1 = document.getElementById('semester1');
             const semester2 = document.getElementById('semester2');
 
-            //if month is between 1 to 6 and 7 to 12 unhide all option, if only 1 to 6 unhide semester 1 option, if only 7 to 12 unhide semester 2 option
+            //if month is between 1 to 6 and 7 to 12 unhide all option, if only 1 to 6 unhide semester 2 option, if only 7 to 12 unhide semester 1 option
             if (month.some(item => item >= 1 && item <= 6) && month.some(item => item >= 7 && item <= 12)) {
                 semester1.hidden = false;
                 semester2.hidden = false;
             } else if (month.some(item => item >= 1 && item <= 6)) {
-                semester1.hidden = false;
-                semester2.hidden = true;
-            } else if (month.some(item => item >= 7 && item <= 12)) {
                 semester1.hidden = true;
                 semester2.hidden = false;
+            } else if (month.some(item => item >= 7 && item <= 12)) {
+                semester1.hidden = false;
+                semester2.hidden = true;
             } else {
                 semester1.hidden = true;
                 semester2.hidden = true;
