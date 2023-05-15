@@ -51,7 +51,7 @@
                     </div>
                     <div class="row">
                         <div class="table-responsive">
-                            <table class="table table-stripped table-hover">
+                            <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th>No</th>
