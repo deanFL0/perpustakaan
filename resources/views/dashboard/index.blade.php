@@ -13,7 +13,36 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>{{ $buku }}</h3>
+                                <p>Buku</p>
+                            </div>
+                            <div class="icon">
+                                <i class="nav-icon fa fa-briefcase"></i>
+                            </div>
+                            <a href="{{ route('buku') }}" class="small-box-footer">
+                                Detail
+                                <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>{{ $program }}</h3>
+                                <p>Program Perpustakaan</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <a href="{{ route('program') }}" class="small-box-footer">
+                                Detail
+                                <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
                     @if (Auth::user()->role == 'admin')
                         <div class="col-lg-3 col-6">
                             <div class="small-box bg-info">
@@ -31,37 +60,6 @@
                             </div>
                         </div>
                     @endif
-
-                    <div class="col-lg-3 col-6">
-                        <div class="small-box bg-info">
-                            <div class="inner">
-                                <h3>{{ $program }}</h3>
-                                <p>Program Perpustakaan</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fas fa-layer-group"></i>
-                            </div>
-                            <a href="{{ route('program') }}" class="small-box-footer">
-                                Detail
-                                <i class="fas fa-arrow-circle-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="small-box bg-info">
-                            <div class="inner">
-                                <h3>{{ $buku }}</h3>
-                                <p>Buku</p>
-                            </div>
-                            <div class="icon">
-                                <i class="nav-icon fa fa-briefcase"></i>
-                            </div>
-                            <a href="{{ route('buku') }}" class="small-box-footer">
-                                Detail
-                                <i class="fas fa-arrow-circle-right"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
