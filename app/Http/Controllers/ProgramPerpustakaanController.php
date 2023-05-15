@@ -14,14 +14,14 @@ class ProgramPerpustakaanController extends Controller
     {
         $program = ProgramPerpustakaan::sortable()->paginate(10)->onEachSide(2)->fragment('program');
         //get waktu kegiatan
-        $waktu_kegiatan2 = ProgramPerpustakaan::selectRaw('MONTH(waktu_kegiatan) as month, YEAR(waktu_kegiatan) as year')->distinct()->orderBy('year', 'asc')->orderBy('month', 'asc')->get();
+        $waktu_kegiatan = ProgramPerpustakaan::selectRaw('MONTH(waktu_kegiatan) as month, YEAR(waktu_kegiatan) as year')->distinct()->orderBy('year', 'asc')->orderBy('month', 'asc')->get();
 
         // $years = ProgramPerpustakaan::selectRaw('YEAR(waktu_kegiatan) as year')->distinct()->orderBy('year', 'asc')->get();
 
         $year = $request->query('year');
         if (!empty($year)) {
             $program = ProgramPerpustakaan::sortable()->whereYear('waktu_kegiatan', $year)->paginate(10)->onEachSide(2)->fragment('program');
-            return view('program.index', ['program' => $program, 'waktu_kegiatan' => $waktu_kegiatan2, 'year' => $year]);
+            return view('program.index', ['program' => $program, 'waktu_kegiatan' => $waktu_kegiatan, 'year' => $year]);
         }
 
         $cari = $request->query('cari');
@@ -34,7 +34,7 @@ class ProgramPerpustakaanController extends Controller
                 ->paginate(10)->onEachSide(2)->fragment('program');
         }
 
-        return view('program.index', ['program' => $program, 'waktu_kegiatan' => $waktu_kegiatan2]);
+        return view('program.index', ['program' => $program, 'waktu_kegiatan' => $waktu_kegiatan]);
     }
 
     public function create()
