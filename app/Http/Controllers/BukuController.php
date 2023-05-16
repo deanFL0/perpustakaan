@@ -12,10 +12,22 @@ class BukuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $buku = Buku::all();
         return view('buku.index', ['buku' => $buku]);
+
+        $cari = $request->query('cari');
+        if (!empty($cari)) {
+            $buku = Buku::sortable()
+                ->where('buku.judul', 'like', '%' . $cari . '%')
+                ->orWhere('buku.kelas', 'like',  '%' . $cari . '%')
+                ->orWhere('buku.pengarang', 'like',  '%' . $cari . '%')
+                ->orWhere('buku.penerbit', 'like',  '%' . $cari . '%')
+                ->orWhere('buku.tahunterbit', 'like',  '%' . $cari . '%')
+                ->orWhere('buku.jenisbuku', 'like',  '%' . $cari . '%')
+                ->orWhere('buku.jumlah', 'like',  '%' . $cari . '%');
+        } 
     }
 
     /**
@@ -23,6 +35,7 @@ class BukuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function create()
     {
         return view('buku.create');
@@ -47,6 +60,7 @@ class BukuController extends Controller
                 'tahunterbit' => $request->tahunterbit,
                 'jenisbuku' => $request->jenisbuku,
                 'jumlah' => $request->jumlah,
+                'kondisi' => $request->kondisi,
             ]);
         return redirect()->route('buku');
     }

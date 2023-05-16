@@ -39,7 +39,7 @@
                     <a href="{{ route('buku') }}" class="nav-link {{ Request::is('buku*') ? 'active' : '' }}">
                         <i class="nav-icon fa fa-briefcase"></i>
                         <p>
-                            Buku
+                                Pendataan Buku
                         </p>
                     </a>
                 </li>

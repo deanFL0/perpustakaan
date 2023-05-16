@@ -18,6 +18,7 @@ class Buku extends Model
         'penerbit',
         'tahunterbit',
         'jenisbuku',
-        'jumlah'
+        'jumlah',
+        'kondisi'
     ];
 }
