@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tahunterbit', 255);
             $table->string('jenisbuku', 50);
             $table->string('jumlah', 255);
+            $table->string('kondisi', 255);
         });
     }
 

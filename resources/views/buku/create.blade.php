@@ -64,6 +64,13 @@
                             <label for="jumlah" class="form-label">Jumlah</label>
                             <input type="number" step="1" value="1" class="form-control" id="jumlah" name="jumlah">
                         </div>
+                        <div class="mb-3">
+                            <label for="kondisi" class="form-label">Kondisi Buku</label>
+                            <select class="form-control" id="kondisi" name="kondisi">
+                                <option value="Bagus">Bagus</option>
+                                <option value="Rusak">Rusak</option>
+                            </select>
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
