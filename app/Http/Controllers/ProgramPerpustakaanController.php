@@ -164,7 +164,7 @@ class ProgramPerpustakaanController extends Controller
             $templateProcessor = new TemplateProcessor('word_template/template.docx');
             $templateProcessor->cloneRow('jenis_program', count($program));
             $i = 1;
-            $j = 1;
+
             //transform waktu_kegiatan date to F - Y format
             foreach ($program as $pro) {
                 $pro->waktu_kegiatan = Carbon::parse($pro->waktu_kegiatan)->locale('id')->translatedFormat('F Y');
@@ -173,18 +173,10 @@ class ProgramPerpustakaanController extends Controller
                 }
             }
 
-            //explode jenis_kegiatan string to array
-            foreach ($program as $pro) {
-                $pro->jenis_kegiatan = explode(", ", $pro->jenis_kegiatan);
-            }
-
             foreach ($program as $pro) {
                 $templateProcessor->setValue('no#' . $i, $no++);
                 $templateProcessor->setValue('jenis_program#' . $i, $pro->jenis_program);
-                foreach ($pro->jenis_kegiatan as $jenis) {
-                    $templateProcessor->cloneRow('jenis_kegiatan#', count($pro->jenis_kegiatan));
-                    $templateProcessor->setValue('jenis_kegiatan#' . $j, $jenis);
-                }
+                $templateProcessor->setValue('jenis_kegiatan#' . $i, $pro->jenis_kegiatan);
                 $templateProcessor->setValue('waktu_kegiatan#' . $i, $pro->waktu_kegiatan);
                 $templateProcessor->setValue('keterangan#' . $i, $pro->keterangan);
                 $i++;
