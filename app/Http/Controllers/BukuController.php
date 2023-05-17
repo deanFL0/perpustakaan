@@ -15,19 +15,19 @@ class BukuController extends Controller
     public function index(Request $request)
     {
         $buku = Buku::all();
-        return view('buku.index', ['buku' => $buku]);
-
+      
         $cari = $request->query('cari');
         if (!empty($cari)) {
-            $buku = Buku::sortable()
-                ->where('buku.judul', 'like', '%' . $cari . '%')
-                ->orWhere('buku.kelas', 'like',  '%' . $cari . '%')
-                ->orWhere('buku.pengarang', 'like',  '%' . $cari . '%')
-                ->orWhere('buku.penerbit', 'like',  '%' . $cari . '%')
-                ->orWhere('buku.tahunterbit', 'like',  '%' . $cari . '%')
-                ->orWhere('buku.jenisbuku', 'like',  '%' . $cari . '%')
-                ->orWhere('buku.jumlah', 'like',  '%' . $cari . '%');
+            $buku = Buku::
+                where('judul', 'like', '%' . $cari . '%')
+                ->orWhere('kelas', 'like',  '%' . $cari . '%')
+                ->orWhere('pengarang', 'like',  '%' . $cari . '%')
+                ->orWhere('penerbit', 'like',  '%' . $cari . '%')
+                ->orWhere('tahunterbit', 'like',  '%' . $cari . '%')
+                ->orWhere('jenisbuku', 'like',  '%' . $cari . '%')
+                ->orWhere('jumlah', 'like',  '%' . $cari . '%')->get();
         } 
+        return view('buku.index', ['buku' => $buku]);
     }
 
     /**
