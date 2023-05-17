@@ -26,6 +26,7 @@ class BukuController extends Controller
                 ->orWhere('tahunterbit', 'like',  '%' . $cari . '%')
                 ->orWhere('jenisbuku', 'like',  '%' . $cari . '%')
                 ->orWhere('jumlah', 'like',  '%' . $cari . '%')
+                ->orWhere('kondisi', 'like',  '%' . $cari . '%')
                 ->paginate(10)->onEachSide(2)->fragment('buku');
         } 
         return view('buku.index', ['buku' => $buku]);
