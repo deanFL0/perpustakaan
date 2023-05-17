@@ -14,7 +14,7 @@ class BukuController extends Controller
      */
     public function index(Request $request)
     {
-        $buku = Buku::all();
+        $buku = Buku::paginate(20)->onEachSide(2)->fragment('buku');
       
         $cari = $request->query('cari');
         if (!empty($cari)) {
@@ -25,7 +25,8 @@ class BukuController extends Controller
                 ->orWhere('penerbit', 'like',  '%' . $cari . '%')
                 ->orWhere('tahunterbit', 'like',  '%' . $cari . '%')
                 ->orWhere('jenisbuku', 'like',  '%' . $cari . '%')
-                ->orWhere('jumlah', 'like',  '%' . $cari . '%')->get();
+                ->orWhere('jumlah', 'like',  '%' . $cari . '%')
+                ->paginate(10)->onEachSide(2)->fragment('buku');
         } 
         return view('buku.index', ['buku' => $buku]);
     }

@@ -39,6 +39,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm mt-3">
+                            <a href="{{ route('buku') }}" class="btn btn-secondary">Refresh</a>
+                        </div>
                     </div>
                 <div class="card-body">
                     <a href="{{ route('buku.create') }}" class="btn btn-primary mb-4">Tambah Buku</a>
@@ -82,9 +85,10 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    
+                    {!! $buku->appends(Request::except('page'))->render() !!}
                 </div>
                 <!-- /.card-footer-->
+
             </div>
             <!-- /.card -->
 
