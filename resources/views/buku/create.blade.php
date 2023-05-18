@@ -57,7 +57,18 @@
                         <div class="mb-3">
                             <label for="jenisbuku" class="form-label">Jenis Buku</label>
                             <select class="form-control" name="jenisbuku" id="jenisbuku">
+                                <option value="Biografi">Biografi</option>
+                                <option value="Buku Bos">Buku Bos</option>
+                                <option value="Buku Paket">Buku Paket</option>
+                                <option value="Cerita Anak">Cerita Anak</option>
+                                <option value="Kamus">Kamus</option>
+                                <option value="Komik">Komik</option>
+                                <option value="Koran">Koran</option>
+                                <option value="Majalah">Majalah</option>
+                                <option value="Novel">Novel</option>
+                                <option value="Peta">Peta</option>
                                 <option value="Pengayaan">Pengayaan</option>
+                                <option value="Refrensi">Refrensi</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -77,7 +88,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    Footer
+                    SMP PGRI 7 BANDUNG
                 </div>
                 <!-- /.card-footer-->
             </div>
