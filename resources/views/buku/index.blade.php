@@ -55,9 +55,9 @@
                                 <th>Penerbit</th>
                                 <th>Tahun Terbit</th>
                                 <th>Jenis Buku</th>
-                                <th>Jumlah</th>
+                                <th>Jumlah Salinan</th>
                                 <th>Kondisi</th>
-                                <th>Action</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,7 +116,7 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Hapus Data, Meluncur!'
+                    confirmButtonText: 'Hapus Data'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Swal.fire(

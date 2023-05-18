@@ -37,8 +37,14 @@
                             <label for="kelas" class="form-label">Untuk Kelas</label>
                             <select class="form-control" id="kelas" name="kelas">
                                 <option value="VII">VII</option>
+                                <option value="VII/1">VII/1</option>
+                                <option value="VII/2">VII/2</option>
                                 <option value="VIII">VIII</option>
+                                <option value="VIII/1">VIII/1</option>
+                                <option value="VIII/2">VIII/2</option>
                                 <option value="IX">IX</option>
+                                <option value="IX/1">IX/1</option>
+                                <option value="IX/2">IX/2</option>
                                 <option value="Umum">Umum</option>
                             </select>
                         </div>
@@ -72,7 +78,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="jumlah" class="form-label">Jumlah</label>
+                            <label for="jumlah" class="form-label">Jumlah Salinan Buku</label>
                             <input type="number" step="1" value="1" class="form-control" id="jumlah" name="jumlah">
                         </div>
                         <div class="mb-3">
