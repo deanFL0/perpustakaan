@@ -51,19 +51,31 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
-        Buku::updateOrCreate(
-            [
-                'id' => $request->id
-            ], [
-                'judul' => $request->judul,
-                'kelas' => $request->kelas,
-                'pengarang' => $request->pengarang,
-                'penerbit' => $request->penerbit,
-                'tahunterbit' => $request->tahunterbit,
-                'jenisbuku' => $request->jenisbuku,
-                'jumlah' => $request->jumlah,
-                'kondisi' => $request->kondisi,
-            ]);
+        $request->validate([
+            'judul' => 'required',
+            'kelas' => 'required',
+            'pengarang' => 'required',
+            'penerbit' => 'required',
+            'tahunterbit' => 'required',
+            'jenisbuku' => 'required',
+            'jumlah' => 'required',
+            'kondisi' => 'required',
+        ]);
+        $data = $request->except('_token');
+        Buku::updateOrCreate($data);
+        // Buku::updateOrCreate(
+        //     [
+        //         'id' => $request->id
+        //     ], [
+        //         'judul' => $request->judul,
+        //         'kelas' => $request->kelas,
+        //         'pengarang' => $request->pengarang,
+        //         'penerbit' => $request->penerbit,
+        //         'tahunterbit' => $request->tahunterbit,
+        //         'jenisbuku' => $request->jenisbuku,
+        //         'jumlah' => $request->jumlah,
+        //         'kondisi' => $request->kondisi,
+        //     ]);
         return redirect()->route('buku');
     }
 

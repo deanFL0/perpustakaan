@@ -30,22 +30,22 @@
                         @csrf
                         <div class="mb-3">
                             <label for="nama">Nama</label>
-                            <input type="text" name="nama" placeholder="Nama" class="form-control">
+                            <input type="text" name="nama" placeholder="Nama" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="role">User Role</label>
-                            <select name="role" class="form-control">
+                            <select name="role" class="form-control" required>
                                 <option value="" hidden>Pilih Role</option>
                                 <option value="Petugas">Petugas</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="username">Username</label>
-                            <input type="text" name="username" placeholder="Username" class="form-control">
+                            <input type="text" name="username" placeholder="Username" class="form-control" required>
                         </div>
                         <div class="mb-3">
                             <label for="password">Password</label>
-                            <input type="text" name="password" placeholder="Password" class="form-control">
+                            <input type="text" name="password" placeholder="Password" class="form-control" required>
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">

@@ -31,21 +31,21 @@
                         <input type="hidden" name="id" value="{{ $user->id }}">
                         <div class="mb-3">
                             <label for="nama">Nama</label>
-                            <input type="text" name="nama" placeholder="Nama" class="form-control" value="{{ $user->nama }}">
+                            <input type="text" name="nama" placeholder="Nama" class="form-control" value="{{ $user->nama }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="role">User Role</label>
-                            <select name="role" class="form-control">
+                            <select name="role" class="form-control" required>
                                 <option value="Petugas" {{ $user->status == 'Petugas' ? 'selected' : '' }}>Petugas</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="username">Username</label>
-                            <input type="text" name="username" placeholder="Username" class="form-control" value="{{ $user->username }}">
+                            <input type="text" name="username" placeholder="Username" class="form-control" value="{{ $user->username }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="password">Password</label>
-                            <input type="text" name="password" placeholder="Password" class="form-control" value="{{ $user->password }}">
+                            <input type="text" name="password" placeholder="Password" class="form-control" value="{{ $user->password }}" required>
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">

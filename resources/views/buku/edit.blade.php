@@ -32,11 +32,11 @@
                         <input type="text" id="id" name="id" value="{{ $buku->id }}" hidden>
                         <div class="mb-3">
                             <label for="judul" class="form-label">Judul Buku</label>
-                            <input type="text" class="form-control" id="judul" name="judul" value="{{ $buku->judul }}">
+                            <input type="text" class="form-control" id="judul" name="judul" value="{{ $buku->judul }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="kelas" class="form-label">Untuk Kelas</label>
-                            <select class="form-control" id="kelas" name="kelas" value="{{ $buku->kelas }}">
+                            <select class="form-control" id="kelas" name="kelas" value="{{ $buku->kelas }}" required>
                                 <option value="VII">VII</option>
                                 <option value="VII/1">VII/1</option>
                                 <option value="VII/2">VII/2</option>
@@ -51,19 +51,19 @@
                         </div>
                         <div class="mb-3">
                             <label for="pengarang" class="form-label">Penulis</label>
-                            <input type="text" class="form-control" id="pengarang" name="pengarang" value="{{ $buku->pengarang }}">
+                            <input type="text" class="form-control" id="pengarang" name="pengarang" value="{{ $buku->pengarang }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="penerbit" class="form-label">Penerbit Buku</label>
-                            <input type="text" class="form-control" id="penerbit" name="penerbit" value="{{ $buku->penerbit }}">
+                            <input type="text" class="form-control" id="penerbit" name="penerbit" value="{{ $buku->penerbit }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="tahunterbit" class="form-label">Tahun Terbit</label>
-                            <input type="number" min="1900" max="2099" step="1" value="2016" class="form-control" id="tahunterbit" name="tahunterbit" value="{{ $buku->tahunterbit }}">
+                            <input type="number" min="1900" max="2099" step="1" value="2016" class="form-control" id="tahunterbit" name="tahunterbit" value="{{ $buku->tahunterbit }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="jenisbuku" class="form-label">Jenis Buku</label>
-                            <select class="form-control" name="jenisbuku" id="jenisbuku" value="{{ $buku->jenisbuku }}">
+                            <select class="form-control" name="jenisbuku" id="jenisbuku" value="{{ $buku->jenisbuku }}" required>
                                 <option value="Biografi">Biografi</option>
                                 <option value="Buku Bos">Buku Bos</option>
                                 <option value="Buku Paket">Buku Paket</option>
@@ -80,11 +80,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="jumlah" class="form-label">Jumlah Salinan Buku</label>
-                            <input type="number" step="1" value="1" class="form-control" id="jumlah" name="jumlah" value="{{ $buku->jumlah }}">
+                            <input type="number" step="1" value="1" class="form-control" id="jumlah" name="jumlah" value="{{ $buku->jumlah }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="kondisi" class="form-label">Kondisi Buku</label>
-                            <select class="form-control" id="kondisi" name="kondisi" value="{{ $buku->kondisi }}">
+                            <select class="form-control" id="kondisi" name="kondisi" value="{{ $buku->kondisi }}" required>
                                 <option value="Bagus">Bagus</option>
                                 <option value="Rusak">Rusak</option>
                             </select> 
