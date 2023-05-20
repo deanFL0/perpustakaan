@@ -7,6 +7,10 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ config('app.name') }}</title>
 
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon') }}/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon') }}/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon') }}/favicon-16x16.png">
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
