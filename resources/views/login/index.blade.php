@@ -27,35 +27,26 @@
     <div class="container py-5 h-100">
         <div class="row d-flex align-items-center justify-content-center h-100">
             <div class="col-md-8 col-lg-7 col-xl-6">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                <img src="{{ asset('adminlte')}}/dist/img/PicsArt_05-20-01.06.25.png"
                     class="img-fluid" alt="Phone image">
             </div>
-            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            <div class="col-md-7 col-lg-5 col-xl-5">
 
                 <form method="POST" action="/login">
                     @csrf
                     <!-- Username input -->
-                    <div class="form-floating">
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Username"
+                    <div class="form-floating mb-4">
+                        <input type="text" class="form-control form-control-lg" name="username" id="username" placeholder="Username"
                             autofocus required>
                         <label for="username">Username</label>
                     </div>
 
                     <!-- Password input -->
-                    <div class="form-floating">
-                        <input type="password" class="form-control" name="password" id="password"
+                    <div class="form-floating mb-4">
+                        <input type="password" class="form-control form-control-lg" name="password" id="password"
                             placeholder="Password" required>
                         <label for="password">Password</label>
                     </div>
-
-                    {{-- <div class="d-flex justify-content-around align-items-center mb-4">
-                        <!-- Checkbox -->
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                            <label class="form-check-label" for="form1Example3"> Remember me </label>
-                        </div>
-                        <a href="#!">Forgot password?</a>
-                    </div> --}}
 
                     <!-- Submit button -->
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Log in</button>
