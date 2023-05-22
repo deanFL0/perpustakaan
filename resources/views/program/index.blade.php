@@ -42,24 +42,15 @@
                                         class="btn btn-primary mb-4">{{ $value }}</button>
                                 </div>
                             @endforeach
-                            {{-- @foreach ($years as $item => $value)
-                                <div class="col-1">
-                                    <input type="hidden">
-                                    <button type="submit" name="year" value="{{ $value->year }}"
-                                        class="btn btn-primary mb-4">{{ $value->year }}</button>
-                                </div>
-                            @endforeach --}}
                         </div>
                     </form>
 
                     <div class="row">
-                        <div class="col-10">
+                        <div class="col-sm-10">
                             <a href="{{ route('program.create') }}" class="btn btn-primary mb-4">Tambah</a>
                         </div>
-                        <div class="col-2 right">
-                            {{-- <a href="{{ route('program.print') }}" class="btn btn-success mb-4">Export</a> --}}
-                            <button type="button" class="btn btn-success mb-4" data-toggle="modal"
-                                data-target="#exportModal">
+                        <div class="col-sm-2 right">
+                            <button type="button" class="btn btn-success mb-4" data-toggle="modal" data-target="#exportModal">
                                 Export
                             </button>
                         </div>
