@@ -61,9 +61,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $no = 1 + ($buku->currentPage() - 1) * $buku->perPage();
+                            @endphp
                             @foreach ($buku as $item => $i)
                                 <tr>
-                                    <td>{{ $item + 1 }}</td>
+                                    <td>{{ $no++ }}</td>
                                     <td>{{ $i->judul }}</td>
                                     <td>{{ $i->kelas }}</td>
                                     <td>{{ $i->pengarang }}</td>

@@ -14,7 +14,7 @@ class BukuController extends Controller
      */
     public function index(Request $request)
     {
-        $buku = Buku::paginate(20)->onEachSide(2)->fragment('buku');
+        $buku = Buku::paginate(3)->onEachSide(2)->fragment('buku');
       
         $cari = $request->query('cari');
         if (!empty($cari)) {
@@ -62,7 +62,9 @@ class BukuController extends Controller
             'kondisi' => 'required',
         ]);
         $data = $request->except('_token');
-        Buku::updateOrCreate($data);
+        Buku::updateOrCreate([
+            'id' => $request->id
+        ], $data);
         // Buku::updateOrCreate(
         //     [
         //         'id' => $request->id
