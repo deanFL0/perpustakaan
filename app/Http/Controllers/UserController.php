@@ -53,14 +53,21 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+        $user = User::find(request()->id);
+
         $data = $request->validate([
             'nama' => 'required',
             'role' => 'required',
             'username' => 'required',
             'password' => 'required'
         ]);
+        //if password doesn't change dont store it
+        if ($data['password'] == $user->password) {
+            unset($data['password']);
+        } else {
+            $data['password'] = bcrypt($data['password']);
+        }
 
-        $data['password'] = bcrypt($data['password']);
 
         $user = User::find(request()->id);
         $user->update($data);

@@ -49,7 +49,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="password">Password</label>
-                            <input type="text" name="password" placeholder="Password" class="form-control" required>
+                            <input type="text" name="password" placeholder="Password" class="form-control" value="{{ $user->password }}" required>
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
