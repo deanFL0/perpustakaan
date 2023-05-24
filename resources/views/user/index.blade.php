@@ -72,9 +72,11 @@
                                             <td>{{ $value->password }}</td>
                                             <td>
                                                 <a href="{{ route('user.edit', $value->id) }}"
-                                                    class="btn btn-warning">Edit</a> |
-                                                <a href="javascript:void(0)" data-id="{{ $value->id }}"
+                                                    class="btn btn-warning">Edit</a>
+                                                @if ($value->role != 'admin')
+                                                | <a href="javascript:void(0)" data-id="{{ $value->id }}"
                                                     class="btn btn-danger btn-delete">Hapus</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

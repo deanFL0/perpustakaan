@@ -36,7 +36,11 @@
                         <div class="mb-3">
                             <label for="role">User Role</label>
                             <select name="role" class="form-control" required>
-                                <option value="Petugas" {{ $user->status == 'Petugas' ? 'selected' : '' }}>Petugas</option>
+                                @if($user->role == 'admin')
+                                    <option value="admin">Admin</option>
+                                @else
+                                    <option value="Petugas" {{ $user->role == 'Petugas' ? 'selected' : '' }}>Petugas</option>
+                                @endif
                             </select>
                         </div>
                         <div class="mb-3">
