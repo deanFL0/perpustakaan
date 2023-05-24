@@ -16,7 +16,7 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ Auth::user()->nama }}</a>
+                <a href="{{ route('user.edit', Auth::user()->id) }}" class="d-block">{{ Auth::user()->nama }}</a>
             </div>
         </div>
 

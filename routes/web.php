@@ -55,12 +55,11 @@ Route::post('/buku/store', [App\Http\Controllers\BukuController::class, 'store']
 Route::get('/buku/{id}/edit', [App\Http\Controllers\BukuController::class, 'edit'])->name('buku.edit')->middleware('auth');
 Route::delete('/buku/{id}/delete', [App\Http\Controllers\BukuController::class, 'destroy'])->name('buku.destroy')->middleware('auth');
 
-Route::group(['middleware' => ['auth', 'checkrole:admin']], function (){
+Route::group(['middleware' => ['auth', 'checkrole:admin']], function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
     Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
-    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-    Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
     Route::delete('/user/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
-
+Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit')->middleware('auth');
+Route::post('/user/update', [UserController::class, 'update'])->name('user.update')->middleware('auth');
