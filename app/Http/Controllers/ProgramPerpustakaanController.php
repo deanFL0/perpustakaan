@@ -164,16 +164,16 @@ class ProgramPerpustakaanController extends Controller
         $month1 = '';
         $month2 = '';
         if (!empty($year) && !empty($semester)) {
-            $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->get();
+            $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->with('jenisKegiatan')->get();
             //check if year contain S1 or S2
             if (strpos($semester, 'S1') !== false) {
                 //get all data with year=$year and month=July to December
-                $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->whereMonth('waktu_kegiatan', '>=', 7)->get();
+                $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->whereMonth('waktu_kegiatan', '>=', 7)->with('jenisKegiatan')->get();
                 $month1 = 'Juli';
                 $month2 = 'Desember';
             } elseif (strpos($semester, 'S2') !== false) {
                 //get all data with year=$year and month=January to June
-                $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->whereMonth('waktu_kegiatan', '<=', 6)->get();
+                $program = ProgramPerpustakaan::whereYear('waktu_kegiatan', $year)->whereMonth('waktu_kegiatan', '<=', 6)->with('jenisKegiatan')->get();
                 $month1 = 'Januari';
                 $month2 = 'Juni';
             }
@@ -198,8 +198,12 @@ class ProgramPerpustakaanController extends Controller
             foreach ($program as $pro) {
                 $templateProcessor->setValue('no#' . $i, $no++);
                 $templateProcessor->setValue('jenis_program#' . $i, $pro->jenis_program);
-                $templateProcessor->setValue('jenis_kegiatan#' . $i, $pro->jenis_kegiatan);
-                $templateProcessor->setValue('waktu_kegiatan#' . $i, $pro->waktu_kegiatan);
+                $templateProcessor->setValue('jenis_kegiatan#' . $i, $pro->jenisKegiatan->implode('nama_kegiatan', ', '));
+                if ($pro->waktu_selesai != null) {
+                    $templateProcessor->setValue('waktu_kegiatan#' . $i, $pro->waktu_kegiatan . ' s/d ' . $pro->waktu_selesai);
+                } else {
+                    $templateProcessor->setValue('waktu_kegiatan#' . $i, $pro->waktu_kegiatan);
+                }
                 $templateProcessor->setValue('keterangan#' . $i, $pro->keterangan);
                 $i++;
             }
