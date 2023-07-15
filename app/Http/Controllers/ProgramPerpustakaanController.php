@@ -101,7 +101,7 @@ class ProgramPerpustakaanController extends Controller
 
     public function edit($id)
     {
-        $program = ProgramPerpustakaan::find($id);
+        $program = ProgramPerpustakaan::with('jenisKegiatan')->find($id);
         //get only month and year from waktu_kegiatan and waktu_selesai
         $program->waktu_kegiatan = date('Y-m', strtotime($program->waktu_kegiatan));
         if ($program->waktu_selesai != null) {
@@ -124,13 +124,8 @@ class ProgramPerpustakaanController extends Controller
             $request->merge(['waktu_selesai' => null]);
         }
 
-        $jenis_kegiatan = $request->jenis_kegiatan;
-        $jenis_kegiatan = implode(", ", $jenis_kegiatan);
-        $request->merge(['jenis_kegiatan' => $jenis_kegiatan]);
-
         $data = $request->validate([
             'jenis_program' => 'required',
-            'jenis_kegiatan' => 'required',
             'waktu_kegiatan' => 'required',
             'waktu_selesai' => 'nullable',
             'keterangan' => 'nullable',
@@ -138,6 +133,23 @@ class ProgramPerpustakaanController extends Controller
 
         $program = ProgramPerpustakaan::find($request->id);
         $program->update($data);
+        //also update jenis kegiatan
+        $jenis_kegiatan = $program->jenisKegiatan;
+        //create or update jenis kegiatan
+        for ($i = 0; $i < count($request->jenis_kegiatan); $i++) {
+            if (isset($jenis_kegiatan[$i])) {
+                $jenis_kegiatan[$i]->update([
+                    'jenis_kegiatan' => $request->jenis_kegiatan[$i]
+                ]);
+            } else {
+                $jenis_kegiatan = $request->jenis_kegiatan[$i];
+                $jenis_kegiatan = JenisKegiatan::create([
+                    'program_perpustakaan_id' => $program->id,
+                    'jenis_kegiatan' => $jenis_kegiatan
+                ]);
+            }
+        }
+
         return redirect()->route('program');
     }
 

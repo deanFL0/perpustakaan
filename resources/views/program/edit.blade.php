@@ -42,13 +42,23 @@
                             <label for="jenis_kegiatan">Jenis Kegiatan</label>
                             <ol>
                                 <div id="jenisKegiatan">
-                                    @php
-                                        $jenisKegiatan = explode(',', $program->jenis_kegiatan);
-                                    @endphp
-                                    @foreach ($jenisKegiatan as $item)
+                                    @foreach ($program->jenisKegiatan as $item)
                                         <li>
-                                            <input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan"
-                                                class="form-control" value="{{ $item }}" required>
+                                            @if ($loop->first)
+                                                <div class="input-group mb-3">
+                                                    <input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan"
+                                                        class="form-control" value="{{ $item->jenis_kegiatan }}" required>
+                                                </div>
+                                            @else
+                                                <div class="input-group mb-3">
+                                                    <input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan"
+                                                        class="form-control" value="{{ $item->jenis_kegiatan }}" required>
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-danger"
+                                                            onclick="removeInput(this)">-</button>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </li>
                                     @endforeach
                                 </div>
@@ -61,7 +71,7 @@
                             <div class="col-6">
                                 <label for="waktu_kegiatan">Waktu kegiatan</label>
                                 <input type="month" name="waktu_kegiatan" class="form-control"
-                                    value="{{ $program->waktu_kegiatan }}" required>
+                                    value="{{ $program->waktu_kegiatan }}" required onchange="minDate()">
                             </div>
                             <div class="col-6">
                                 <label for="waktu_selesai">Waktu Selesai</label>
@@ -112,6 +122,11 @@
         function removeInput(div) {
             //remove the li element
             document.getElementById("jenisKegiatan").removeChild(div.parentNode.parentNode.parentNode);
+        }
+
+        function minDate() {
+            const waktuKegiatan = document.getElementsByName("waktu_kegiatan")[0].value;
+            document.getElementsByName("waktu_selesai")[0].min = waktuKegiatan;
         }
     </script>
 @endpush
