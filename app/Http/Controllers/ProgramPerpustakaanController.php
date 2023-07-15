@@ -135,19 +135,17 @@ class ProgramPerpustakaanController extends Controller
         $program->update($data);
         //also update jenis kegiatan
         $jenis_kegiatan = $program->jenisKegiatan;
-        //create or update jenis kegiatan
+        //delete all jenis kegiatan and create new one
+        foreach ($jenis_kegiatan as $jenis) {
+            $jenis->delete();
+        }
+
         for ($i = 0; $i < count($request->jenis_kegiatan); $i++) {
-            if (isset($jenis_kegiatan[$i])) {
-                $jenis_kegiatan[$i]->update([
-                    'nama_kegiatan' => $request->jenis_kegiatan[$i]
-                ]);
-            } else {
-                $jenis_kegiatan = $request->jenis_kegiatan[$i];
-                $jenis_kegiatan = JenisKegiatan::create([
-                    'program_perpustakaan_id' => $program->id,
-                    'nama_kegiatan' => $jenis_kegiatan
-                ]);
-            }
+            $jenis_kegiatan = $request->jenis_kegiatan[$i];
+            $jenis_kegiatan = JenisKegiatan::create([
+                'program_perpustakaan_id' => $program->id,
+                'nama_kegiatan' => $jenis_kegiatan
+            ]);
         }
 
         return redirect()->route('program');
