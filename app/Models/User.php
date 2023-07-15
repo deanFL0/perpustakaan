@@ -25,4 +25,9 @@ class User extends Authenticable
         'password',
         'remember_token'
     ];
+
+    public function program_perpustakaan()
+    {
+        return $this->hasMany(ProgramPerpustakaan::class);
+    }
 }

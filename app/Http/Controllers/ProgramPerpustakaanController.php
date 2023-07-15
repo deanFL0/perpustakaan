@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProgramPerpustakaan;
+use App\Models\JenisKegiatan;
 use Kyslik\ColumnSortable\Sortable;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Carbon\Carbon;
@@ -12,7 +13,8 @@ class ProgramPerpustakaanController extends Controller
 {
     public function index(Request $request)
     {
-        $program = ProgramPerpustakaan::sortable()->paginate(10)->onEachSide(2)->fragment('program');
+        $program = ProgramPerpustakaan::with('jenisKegiatan')->sortable()->paginate(10)->onEachSide(2)->fragment('program');
+
         //get waktu kegiatan
         $waktu_kegiatan = ProgramPerpustakaan::selectRaw('MONTH(waktu_kegiatan) as month, YEAR(waktu_kegiatan) as year')->distinct()->orderBy('year', 'asc')->orderBy('month', 'asc')->get();
 
@@ -20,18 +22,21 @@ class ProgramPerpustakaanController extends Controller
 
         $year = $request->query('year');
         if (!empty($year)) {
-            $program = ProgramPerpustakaan::sortable()->whereYear('waktu_kegiatan', $year)->paginate(10)->onEachSide(2)->fragment('program');
+            $program = ProgramPerpustakaan::with('jenisKegiatan')->sortable()->whereYear('waktu_kegiatan', $year)->paginate(10)->onEachSide(2)->fragment('program');
             return view('program.index', ['program' => $program, 'waktu_kegiatan' => $waktu_kegiatan, 'year' => $year]);
         }
 
         $cari = $request->query('cari');
         if (!empty($cari)) {
-            $program = ProgramPerpustakaan::sortable()
+            $program = ProgramPerpustakaan::with('jenisKegiatan')->sortable()
                 ->where('program_perpustakaan.jenis_program', 'like', '%' . $cari . '%')
-                ->orWhere('program_perpustakaan.jenis_kegiatan', 'like',  '%' . $cari . '%')
                 ->orWhere('program_perpustakaan.waktu_kegiatan', 'like',  '%' . $cari . '%')
                 ->orWhere('program_perpustakaan.keterangan', 'like',  '%' . $cari . '%')
+                ->orWhereHas('jenisKegiatan', function ($query) use ($cari) {
+                    $query->where('jenis_kegiatan', 'like', '%' . $cari . '%');
+                })
                 ->paginate(10)->onEachSide(2)->fragment('program');
+            $jenis_kegiatan = JenisKegiatan::sortable()->where('jenis_kegiatan', 'like', '%' . $cari . '%')->paginate(10)->onEachSide(2)->fragment('jenis_kegiatan');
         }
 
         return view('program.index', ['program' => $program, 'waktu_kegiatan' => $waktu_kegiatan]);
@@ -71,19 +76,26 @@ class ProgramPerpustakaanController extends Controller
             $request->merge(['waktu_selesai' => null]);
         }
 
-        //turn array into string from jenis_kegiatan
-        $jenis_kegiatan = $request->jenis_kegiatan;
-        $jenis_kegiatan = implode(", ", $jenis_kegiatan);
-        $request->merge(['jenis_kegiatan' => $jenis_kegiatan]);
-
         $request->validate([
             'jenis_program' => 'required',
-            'jenis_kegiatan' => 'required',
             'waktu_kegiatan' => 'required',
             'waktu_selesai' => 'nullable',
             'keterangan' => 'nullable'
         ]);
-        ProgramPerpustakaan::create($request->all());
+        $program = ProgramPerpustakaan::create($request->all());
+
+        //turn array into string from jenis_kegiatan
+        $jenis_kegiatan = $request->jenis_kegiatan;
+        $jenis_kegiatan = implode(", ", $jenis_kegiatan);
+
+        for ($i = 0; $i < count($request->jenis_kegiatan); $i++) {
+            $jenis_kegiatan = $request->jenis_kegiatan[$i];
+            $jenis_kegiatan = JenisKegiatan::create([
+                'program_perpustakaan_id' => $program->id,
+                'jenis_kegiatan' => $jenis_kegiatan
+            ]);
+        }
+
         return redirect()->route('program');
     }
 

@@ -6,7 +6,7 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <h1>Input Program Perpustakaan</h1>
+                    <h1>Tambah Program Perpustakaan</h1>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -28,6 +28,9 @@
                     <a href="{{ route('program') }}" class="btn btn-primary mb-4">Kembali</a>
                     <form action="{{ route('program.store') }}" method="POST">
                         @csrf
+                        <div>
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                        </div>
                         <div class="mb-3">
                             <label for="jenis_program">Jenis Program</label>
                             <input type="text" name="jenis_program" placeholder="Jenis Program" class="form-control"

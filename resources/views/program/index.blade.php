@@ -6,7 +6,7 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <h1>List Program Perpustakaan</h1>
+                    <h1>Daftar Program Kerja Perpustakaan</h1>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -97,11 +97,10 @@
                                                 <td>{{ $value->jenis_program }}</td>
                                                 <td>
                                                     @php
-                                                        $jenis_kegiatan = explode(',', $value->jenis_kegiatan);
                                                         $num = 1;
                                                     @endphp
-                                                    @foreach ($jenis_kegiatan as $item)
-                                                        {{ $num++ }}. {{ $item }} <br>
+                                                    @foreach ($value->jenisKegiatan as $item => $value2)
+                                                        {{ $num++ }}. {{ $value2->jenis_kegiatan }} <br>
                                                     @endforeach
                                                 </td>
                                                 <td>{{ Carbon\Carbon::parse($value->waktu_kegiatan)->locale('id')->translatedFormat('F Y') }}

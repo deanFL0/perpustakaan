@@ -13,7 +13,7 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-6">
+                    {{-- <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                             <div class="inner">
                                 <h3>{{ $buku }}</h3>
@@ -27,12 +27,12 @@
                                 <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                             <div class="inner">
                                 <h3>{{ $program }}</h3>
-                                <p>Program Perpustakaan</p>
+                                <p>Program Kerja Perpustakaan</p>
                             </div>
                             <div class="icon">
                                 <i class="fas fa-layer-group"></i>

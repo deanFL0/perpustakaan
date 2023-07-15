@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Kyslik\ColumnSortable\Sortable;
-
+use App\Models\User;
 
 class ProgramPerpustakaan extends Model
 {
@@ -15,8 +15,8 @@ class ProgramPerpustakaan extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'user_id',
         'jenis_program',
-        'jenis_kegiatan',
         'waktu_kegiatan',
         'waktu_selesai',
         'keterangan'
@@ -24,9 +24,18 @@ class ProgramPerpustakaan extends Model
 
     public $sortable = [
         'jenis_program',
-        'jenis_kegiatan',
         'waktu_kegiatan',
         'waktu_selesai',
         'keterangan'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function jenisKegiatan()
+    {
+        return $this->hasMany(JenisKegiatan::class);
+    }
 }

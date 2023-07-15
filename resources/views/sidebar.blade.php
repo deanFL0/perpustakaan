@@ -35,19 +35,19 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('buku') }}" class="nav-link {{ Request::is('buku*') ? 'active' : '' }}">
                         <i class="nav-icon fa fa-briefcase"></i>
                         <p>
                                 Pendataan Buku
                         </p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link {{ Request::is('program*') ? 'active' : '' }}">
                         <i class="fa-solid fa-layer-group"></i>
                         <p>
-                            Program Perpustakaan
+                            Program Kerja Perpustakaan
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -55,7 +55,7 @@
                         <li class="nav-item">
                             <a href="/program" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>List Program Perpustakaan</p>
+                                <p>Daftar Program Kerja Perpustakaan</p>
                             </a>
                         </li>
                         <li class="nav-item">
