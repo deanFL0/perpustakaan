@@ -27,7 +27,7 @@ class BukuController extends Controller
                 ->orWhere('jenisbuku', 'like',  '%' . $cari . '%')
                 ->orWhere('jumlah', 'like',  '%' . $cari . '%')
                 ->orWhere('kondisi', 'like',  '%' . $cari . '%')
-                ->paginate(10)->onEachSide(2)->fragment('buku');
+                ->paginate(20)->onEachSide(2)->fragment('buku');
         } 
         return view('buku.index', ['buku' => $buku]);
     }
@@ -62,7 +62,9 @@ class BukuController extends Controller
             'kondisi' => 'required',
         ]);
         $data = $request->except('_token');
-        Buku::updateOrCreate($data);
+        Buku::updateOrCreate([
+            'id' => $request->id
+        ], $data);
         // Buku::updateOrCreate(
         //     [
         //         'id' => $request->id
