@@ -100,7 +100,7 @@
                                                         $num = 1;
                                                     @endphp
                                                     @foreach ($value->jenisKegiatan as $item => $value2)
-                                                        {{ $num++ }}. {{ $value2->jenis_kegiatan }} <br>
+                                                        {{ $num++ }}. {{ $value2->nama_kegiatan }} <br>
                                                     @endforeach
                                                 </td>
                                                 <td>{{ Carbon\Carbon::parse($value->waktu_kegiatan)->locale('id')->translatedFormat('F Y') }}

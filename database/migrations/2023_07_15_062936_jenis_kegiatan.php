@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('jenis_kegiatan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('program_perpustakaan_id')->constrained('program_perpustakaan')->onDelete('cascade');
-            $table->string('jenis_kegiatan');
+            $table->string('nama_kegiatan');
         });
     }
 

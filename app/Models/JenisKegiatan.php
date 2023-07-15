@@ -15,11 +15,11 @@ class JenisKegiatan extends Model
 
     protected $fillable = [
         'program_perpustakaan_id',
-        'jenis_kegiatan'
+        'nama_kegiatan'
     ];
 
     public $sortable = [
-        'jenis_kegiatan'
+        'nama_kegiatan'
     ];
 
     public function program()

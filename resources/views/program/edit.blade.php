@@ -34,10 +34,6 @@
                             <input type="text" name="jenis_program" placeholder="Nama program" class="form-control"
                                 value="{{ $program->jenis_program }}" required>
                         </div>
-                        {{-- <div class="mb-3">
-                            <label for="jenis_kegiatan">Jenis Kegiatan</label>
-                            <textarea name="jenisKegiatan" class="form-control" cols="30" rows="10" required>{{ $program->jenis_kegiatan }}</textarea>
-                        </div> --}}
                         <div class="mb-3">
                             <label for="jenis_kegiatan">Jenis Kegiatan</label>
                             <ol>
@@ -47,12 +43,12 @@
                                             @if ($loop->first)
                                                 <div class="input-group mb-3">
                                                     <input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan"
-                                                        class="form-control" value="{{ $item->jenis_kegiatan }}" required>
+                                                        class="form-control" value="{{ $item->nama_kegiatan }}" required>
                                                 </div>
                                             @else
                                                 <div class="input-group mb-3">
                                                     <input type="text" name="jenis_kegiatan[]" placeholder="Jenis Kegiatan"
-                                                        class="form-control" value="{{ $item->jenis_kegiatan }}" required>
+                                                        class="form-control" value="{{ $item->nama_kegiatan }}" required>
                                                     <div class="input-group-append">
                                                         <button type="button" class="btn btn-danger"
                                                             onclick="removeInput(this)">-</button>

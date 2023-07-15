@@ -33,10 +33,10 @@ class ProgramPerpustakaanController extends Controller
                 ->orWhere('program_perpustakaan.waktu_kegiatan', 'like',  '%' . $cari . '%')
                 ->orWhere('program_perpustakaan.keterangan', 'like',  '%' . $cari . '%')
                 ->orWhereHas('jenisKegiatan', function ($query) use ($cari) {
-                    $query->where('jenis_kegiatan', 'like', '%' . $cari . '%');
+                    $query->where('nama_kegiatan', 'like', '%' . $cari . '%');
                 })
                 ->paginate(10)->onEachSide(2)->fragment('program');
-            $jenis_kegiatan = JenisKegiatan::sortable()->where('jenis_kegiatan', 'like', '%' . $cari . '%')->paginate(10)->onEachSide(2)->fragment('jenis_kegiatan');
+            $jenis_kegiatan = JenisKegiatan::sortable()->where('nama_kegiatan', 'like', '%' . $cari . '%')->paginate(10)->onEachSide(2)->fragment('nama_kegiatan');
         }
 
         return view('program.index', ['program' => $program, 'waktu_kegiatan' => $waktu_kegiatan]);
@@ -92,7 +92,7 @@ class ProgramPerpustakaanController extends Controller
             $jenis_kegiatan = $request->jenis_kegiatan[$i];
             $jenis_kegiatan = JenisKegiatan::create([
                 'program_perpustakaan_id' => $program->id,
-                'jenis_kegiatan' => $jenis_kegiatan
+                'nama_kegiatan' => $jenis_kegiatan
             ]);
         }
 
@@ -139,13 +139,13 @@ class ProgramPerpustakaanController extends Controller
         for ($i = 0; $i < count($request->jenis_kegiatan); $i++) {
             if (isset($jenis_kegiatan[$i])) {
                 $jenis_kegiatan[$i]->update([
-                    'jenis_kegiatan' => $request->jenis_kegiatan[$i]
+                    'nama_kegiatan' => $request->jenis_kegiatan[$i]
                 ]);
             } else {
                 $jenis_kegiatan = $request->jenis_kegiatan[$i];
                 $jenis_kegiatan = JenisKegiatan::create([
                     'program_perpustakaan_id' => $program->id,
-                    'jenis_kegiatan' => $jenis_kegiatan
+                    'nama_kegiatan' => $jenis_kegiatan
                 ]);
             }
         }
