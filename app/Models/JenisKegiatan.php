@@ -22,7 +22,7 @@ class JenisKegiatan extends Model
         'nama_kegiatan'
     ];
 
-    public function program()
+    public function programPerpustakaan()
     {
         return $this->belongsTo(ProgramPerpustakaan::class);
     }

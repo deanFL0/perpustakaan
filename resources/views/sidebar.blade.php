@@ -71,7 +71,7 @@
                     <a href="#" class="nav-link {{ Request::is('user*') ? 'active' : '' }}">
                         <i class="fas fa-user"></i>
                         <p>
-                            User Controll
+                            Kontrol Pengguna
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -79,13 +79,13 @@
                         <li class="nav-item">
                             <a href="/user" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>List User</p>
+                                <p>Daftar Pengguna</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/user/create" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Tambah User</p>
+                                <p>Tambah Pengguna</p>
                             </a>
                         </li>
                     </ul>

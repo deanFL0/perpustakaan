@@ -6,7 +6,7 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <h1>Tambah Program Perpustakaan</h1>
+                    <h1>Tambah Program Kerja Perpustakaan</h1>
                 </div>
             </div><!-- /.container-fluid -->
         </section>

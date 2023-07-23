@@ -198,7 +198,10 @@ class ProgramPerpustakaanController extends Controller
             foreach ($program as $pro) {
                 $templateProcessor->setValue('no#' . $i, $no++);
                 $templateProcessor->setValue('jenis_program#' . $i, $pro->jenis_program);
-                $templateProcessor->setValue('jenis_kegiatan#' . $i, $pro->jenisKegiatan->implode('nama_kegiatan', '; '));
+                //with phpword, make ordered list for jenis kegiatan column
+                $templateProcessor->setValue('jenis_kegiatan#' . $i, $pro->jenisKegiatan->map(function ($item, $key) {
+                    return $key + 1 . '. ' . $item->nama_kegiatan . '<w:br/>';
+                })->implode("\n"));
                 if ($pro->waktu_selesai != null) {
                     $templateProcessor->setValue('waktu_kegiatan#' . $i, $pro->waktu_kegiatan . ' s/d ' . $pro->waktu_selesai);
                 } else {

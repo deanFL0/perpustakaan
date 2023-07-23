@@ -6,7 +6,7 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <h1>Input User</h1>
+                    <h1>Tambah Pengguna</h1>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -17,7 +17,7 @@
             <!-- Default box -->
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Tambah User</h3>
+                    <h3 class="card-title">Tambah Pengguna</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                             <i class="fas fa-minus"></i>

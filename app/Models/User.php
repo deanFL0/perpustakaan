@@ -26,7 +26,7 @@ class User extends Authenticable
         'remember_token'
     ];
 
-    public function program_perpustakaan()
+    public function programPerpustakaan()
     {
         return $this->hasMany(ProgramPerpustakaan::class);
     }
