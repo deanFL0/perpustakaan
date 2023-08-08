@@ -14,11 +14,13 @@ return new class extends Migration
         //
         Schema::create('program_perpustakaan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('user');
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('jenis_program');
             $table->date('waktu_kegiatan');
             $table->date('waktu_selesai')->nullable();
             $table->string('keterangan')->nullable();
+
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
         });
     }
 
@@ -28,5 +30,6 @@ return new class extends Migration
     public function down(): void
     {
         //
+        Schema::dropIfExists('program_perpustakaan');
     }
 };
